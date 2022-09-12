@@ -1,0 +1,139 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    min-height: 74px;
+    width: 100%;
+    margin: 0;
+    background: #465DFF;
+}
+  
+  /* @media (max-width: 540px) {
+    .header {
+      padding-bottom: 32px;
+    }
+  } */
+
+.header_signedup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    min-height: 74px;
+    width: 100%;
+    margin: 0;
+    background: #FFFFFF;
+}
+  
+.header__logo {
+    background-image: url(../../images/logo.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 38px;
+    height: 38px;
+    margin-left: 70px;
+}
+
+.header__info {
+    display: flex;
+    flex-direction: row;
+    margin-right: 70px;
+    align-items: center;
+}
+
+.header__info_signedup {
+    justify-self: center;
+    margin-right: 0;
+    margin-left: 62px;
+}
+
+.header__info_signedup :first-child {
+    margin-right: 16px;
+}
+
+.header__link {
+    display: none;
+}
+
+.header__link_active {
+    display: flex;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.header__link_active_black {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #000000;
+    margin-right: 0;
+}
+
+.header__link_active:hover {
+    opacity: 0.8;
+}
+
+.header__login-button {
+    display: none;
+}
+
+.header__login-button_active {
+    display: flex;
+    width: 76px;
+    height: 32px;
+    border: none;
+    background-color: #2BE080;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 32px;
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+}
+
+.header__login-button_active_signedup {
+    width: 100px;
+    height: 32px;
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 70px;
+}
+
+.header__text {
+    font-size: 13px;
+    margin: 0;
+    margin-left: 11px;
+}
+
+.header__profile-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: #F9F9F9;
+    border-radius: 50px;
+    margin-right: 3px;
+}
+
+.header__profile-logo {
+    background-image: url(../../images/icon__profile-logo.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 10.38px;
+    height: 10.67px;
+    
+}
