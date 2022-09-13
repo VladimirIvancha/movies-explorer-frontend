@@ -26,7 +26,21 @@ function Portfolio({
 {  
     return (
       <div className="portfolio">
-          
+        <ul className="portfolio__grid">
+            <li className="portfolio__title">Портфолио</li>
+            <li className="portfolio__item">
+                <a className="portfolio__link" href="https://github.com/VladimirIvancha">Статичный сайт</a>
+                <a className="portfolio__icon" href="https://github.com/VladimirIvancha">↗</a>
+            </li>
+            <li className="portfolio__item">
+                <a className="portfolio__link" href="https://github.com/VladimirIvancha">Адаптивный сайт</a>
+                <a className="portfolio__icon" href="https://github.com/VladimirIvancha">↗</a>
+            </li>
+            <li className="portfolio__item">
+                <a className="portfolio__link" href="https://github.com/VladimirIvancha">Одностраничное приложение</a>
+                <a className="portfolio__icon" href="https://github.com/VladimirIvancha">↗</a>
+            </li>
+        </ul>
       </div>
     );
 }

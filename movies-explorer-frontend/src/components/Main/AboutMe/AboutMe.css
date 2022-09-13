@@ -1,0 +1,92 @@
+.aboutMe {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1280px;
+    min-height: 544px;
+    background-color: #FFFFFF;
+    padding-top: 110px;
+}
+
+.aboutMe__title {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26.63px;
+    color: #000000;
+    align-self: flex-start;
+    margin: 0;
+    margin-left: 70px;
+}
+
+.aboutMe__line {
+    max-width: 1140px;
+    width: calc(100% - 140px);
+    height: 1px;
+    background: #000000;
+    margin-top: 23px;
+    align-self: center;
+}
+
+.aboutMe__wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    margin-top: 66px;
+    margin-left: 70px;
+    width: calc(100% - 140px);
+    justify-content: space-between;
+}
+
+.aboutMe__info {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 100%;
+}
+
+.aboutMe__info-title {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    color: #000000;
+    margin: 0;
+}
+
+.aboutMe__info-subtitle {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: #000000;
+    margin: 0;
+    margin-top: 18px;
+}
+
+.aboutMe__info-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+    margin: 0;
+    margin-top: 26px;
+    max-width: 600px;
+    min-height: 88px;
+}
+
+.aboutMe__info-profile {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.94px;
+    color: #000000;
+    margin: 0;
+    margin-top: 99px;
+    text-decoration: none;
+}
+
+.aboutMe__info-photo {
+    background-image: url(../../../images/VladimirIvancha.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 270px;
+    height: 327px;
+    background-position: top;
+}
