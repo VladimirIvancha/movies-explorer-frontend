@@ -10,18 +10,18 @@ function Header({ onSignOut, loggedIn }) {
         <header className="header_signedup">
             <NavLink className="header__logo" to='/'></NavLink>
             <div className={`header__info ${loggedIn && 'header__info_signedup'}`}>
-              <NavLink to="/sign-in"
+              <NavLink to="/movies"
                 className={`header__link ${loggedIn && 'header__link_active header__link_active_black'}`}
               >
                 Фильмы
               </NavLink>
-              <NavLink to="/sign-in"
+              <NavLink to="/saved-movies"
                 className={`header__link ${loggedIn && 'header__link_active header__link_active_black'}`}
               >
                 Сохраненные фильмы
               </NavLink>
             </div>
-            <NavLink to="/sign-in"
+            <NavLink to="/profile"
                 className={`header__login-button ${loggedIn && 'header__login-button_active header__login-button_active_signedup'}`}
               >
                 <p className='header__text'>Аккаунт</p>

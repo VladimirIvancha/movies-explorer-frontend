@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext, memo } from "react";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox"
 
-function SearchForm({
+function FilterCheckbox({
     onClose,
     isOpen,
     onUpdateUser,
@@ -85,25 +84,11 @@ function SearchForm({
     }
   
     return (
-        <div className="searchform">
-            <div className="searchform__wrapper">
-                <input
-                    value={userAbout || ''}
-                    type="text"
-                    className="searchform__item"
-                    name="prophecy"
-                    placeholder="Фильм"
-                    minLength="2"
-                    maxLength="200"
-                    required
-                    onChange={handleOnChangeInputAbout}
-                />
-                <div className="searchform__find-icon" onSubmit={handleSubmit}></div>
-            </div> 
-            <div className="searchform__line"></div>
-            <FilterCheckbox />
+        <div className="filtercheckbox">
+            <input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes"/>
+            <label for="happy"><p class="custom-checkbox-text">Короткометражки</p></label>
         </div>
     );
   }
-  
-  export default memo(SearchForm);
+
+export default memo(FilterCheckbox);

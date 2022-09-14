@@ -3,7 +3,8 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-// import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Movies from "../Movies/Movies";
 import Footer from "../Footer/Footer";
 import * as auth from "../../utils/auth";
 import React, { useState } from "react";
@@ -29,7 +30,7 @@ function App() {
 //   const [selectedCard, setSelectedCard] = useState({ name: " ", link: " " });
 //   const [cards, setCards] = useState([]);
   const [email, setEmail] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [message, setMessage] = useState({ img: "", text: "" });
 
@@ -231,31 +232,31 @@ function App() {
             isOpen={isOpenEditProfile} 
             />
           </Route>
-          {/* <ProtectedRoute
+          <ProtectedRoute
             loggedIn={loggedIn}
-            exact path="/"
-            component={Main}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            onTrashClick={handleTrashButtonClick}
-            closeAllPopups={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-            onUpdateAvatar={handleUpdateAvatar}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-            onAddPlaceSubmit={handleAddPlaceSubmit}
-            cards={cards}
-            isOpenEditProfile={isOpenEditProfile}
-            isAddPlacePopupOpen={isAddPlacePopupOpen}
-            isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-            isDeletePlacePopupOpen={isDeletePlacePopupOpen}
-            isImagePopupOpen={isImagePopupOpen}
-            isSubmitInLoading={isSubmitInLoading}
-            isSubmitSuccess={isSubmitSuccess}
-            selectedCard={selectedCard}
-          /> */}
+            exact path="/movies"
+            component={Movies}
+            // onEditProfile={handleEditProfileClick}
+            // onAddPlace={handleAddPlaceClick}
+            // onEditAvatar={handleEditAvatarClick}
+            // onCardClick={handleCardClick}
+            // onTrashClick={handleTrashButtonClick}
+            // closeAllPopups={closeAllPopups}
+            // onUpdateUser={handleUpdateUser}
+            // onUpdateAvatar={handleUpdateAvatar}
+            // onCardLike={handleCardLike}
+            // onCardDelete={handleCardDelete}
+            // onAddPlaceSubmit={handleAddPlaceSubmit}
+            // cards={cards}
+            // isOpenEditProfile={isOpenEditProfile}
+            // isAddPlacePopupOpen={isAddPlacePopupOpen}
+            // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+            // isDeletePlacePopupOpen={isDeletePlacePopupOpen}
+            // isImagePopupOpen={isImagePopupOpen}
+            // isSubmitInLoading={isSubmitInLoading}
+            // isSubmitSuccess={isSubmitSuccess}
+            // selectedCard={selectedCard}
+          />
         </Switch>
         {/* <InfoTooltip
           name="infoToolTip"

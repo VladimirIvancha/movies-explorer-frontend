@@ -26,7 +26,7 @@ function AboutMe({
 {  
     return (
       <div className="aboutMe">
-        <h2 className="aboutMe__title">О проекте</h2>
+        <h2 className="aboutMe__title">Студент</h2>
         <div className="aboutMe__line"></div>
         <div className="aboutMe__wrapper">
             <div className="aboutMe__info">
