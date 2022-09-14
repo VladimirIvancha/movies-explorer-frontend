@@ -8,7 +8,7 @@ function Header({ onSignOut, loggedIn }) {
     <>
       {loggedIn ?
         <header className="header_signedup">
-            <div className="header__logo"></div>
+            <NavLink className="header__logo" to='/'></NavLink>
             <div className={`header__info ${loggedIn && 'header__info_signedup'}`}>
               <NavLink to="/sign-in"
                 className={`header__link ${loggedIn && 'header__link_active header__link_active_black'}`}
@@ -32,7 +32,7 @@ function Header({ onSignOut, loggedIn }) {
         </header>
         :
         <header className="header">
-            <div className="header__logo"></div>
+            <NavLink className="header__logo" to='/'></NavLink>
             <div className="header__info">
               <NavLink className="header__link_active" to='/sign-in'>Регистрация</NavLink>
               <NavLink className="header__login-button_active" to='/sign-up'>Войти</NavLink>

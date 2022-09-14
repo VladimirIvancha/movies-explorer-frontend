@@ -1,25 +1,25 @@
 import "../../index.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-// import Login from "./Login";
-// import Register from "./Register";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 // import ProtectedRoute from "./ProtectedRoute";
 import Footer from "../Footer/Footer";
-// import * as auth from "../utils/auth.js";
+import * as auth from "../../utils/auth";
 import React, { useState } from "react";
 // import { api } from "../utils/api";
 // import { useEffect } from "react";
 import { memo } from "react";
-// import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // import InfoTooltip from "./InfoTooltip";
-// import success from "../images/success.svg";
-// import unSuccess from "../images/unSuccess.svg";
+import success from "../../images/success.svg";
+import unSuccess from "../../images/unSuccess.svg";
 
 function App() {
-//   const history = useHistory();
+  const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
-//   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+  const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
 //   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 //   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 //   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
@@ -28,10 +28,10 @@ function App() {
 //   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 //   const [selectedCard, setSelectedCard] = useState({ name: " ", link: " " });
 //   const [cards, setCards] = useState([]);
-//   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-//   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-//   const [message, setMessage] = useState({ img: "", text: "" });
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [message, setMessage] = useState({ img: "", text: "" });
 
 //   useEffect(() => {
 //     if (loggedIn) {
@@ -173,32 +173,32 @@ function App() {
 //     }
 //   }
 
-//   function handleRegistration(password, email) {
-//     auth.register(password, email)
-//       .then((res) => {
-//         if (res.statusCode !== 201)
-//           setEmail(res.email)
-//         history.push('/sign-in')
-//       })
-//       .then(() => setMessage({ img: success, text: 'Вы успешно зарегистрировались!' }))
-//       .catch(() => setMessage({img: unSuccess, text: "Что-то пошло не так! Попробуйте ещё раз."}))
-//       .finally(() => setIsInfoTooltipOpen(true))
-//   }
+  function handleRegistration(password, email) {
+    auth.register(password, email)
+      .then((res) => {
+        if (res.statusCode !== 201)
+          setEmail(res.email)
+        history.push('/sign-in')
+      })
+      .then(() => setMessage({ img: success, text: 'Вы успешно зарегистрировались!' }))
+      .catch(() => setMessage({img: unSuccess, text: "Что-то пошло не так! Попробуйте ещё раз."}))
+      .finally(() => setIsInfoTooltipOpen(true))
+  }
 
-//   function handleAuth(password, email) {
-//     auth.authorize(password, email)
-//     .then((token) => {
-//       auth.getCheckToken(token)
-//         .then((res) => {
-//           setLoggedIn(true);
-//           setEmail(res.email);
-//           history.push("/");
-//         })
-//     })
-//     .then(() => setMessage({ img: success, text: 'Вы успешно вошли!' }))
-//     .catch(() => setMessage({ img: unSuccess, text: 'Что-то пошло не так! Попробуйте ещё раз.' }))
-//     .finally(() => setIsInfoTooltipOpen(true))
-//   }
+  function handleAuth(password, email) {
+    auth.authorize(password, email)
+    .then((token) => {
+      auth.getCheckToken(token)
+        .then((res) => {
+          setLoggedIn(true);
+          setEmail(res.email);
+          history.push("/");
+        })
+    })
+    .then(() => setMessage({ img: success, text: 'Вы успешно вошли!' }))
+    .catch(() => setMessage({ img: unSuccess, text: 'Что-то пошло не так! Попробуйте ещё раз.' }))
+    .finally(() => setIsInfoTooltipOpen(true))
+  }
 
 //   function onSignOut() {
 //     localStorage.removeItem("jwt");
@@ -208,26 +208,29 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header
-            // email={email} 
-            loggedIn={loggedIn} 
-            // onSignOut={onSignOut} 
-        />
-        <Main />
-        {/* <Switch> */}
-          {/* <Route path="/sign-up">
+        <Switch>
+          <Route exact path="/">
+            <Header
+              // email={email} 
+              loggedIn={loggedIn} 
+              // onSignOut={onSignOut} 
+            />
+            <Main />
+            <Footer />
+          </Route>
+          <Route path="/sign-in">
             <Register
               onRegister={handleRegistration}
               isOpen={isOpenEditProfile}
               isInfoTooltipOpen={isInfoTooltipOpen}
             />
-          </Route> */}
-          {/* <Route path="/sign-in">
+          </Route>
+          <Route path="/sign-up">
             <Login 
             onAuth={handleAuth} 
             isOpen={isOpenEditProfile} 
             />
-          </Route> */}
+          </Route>
           {/* <ProtectedRoute
             loggedIn={loggedIn}
             exact path="/"
@@ -253,8 +256,7 @@ function App() {
             isSubmitSuccess={isSubmitSuccess}
             selectedCard={selectedCard}
           /> */}
-        {/* </Switch> */}
-        <Footer />
+        </Switch>
         {/* <InfoTooltip
           name="infoToolTip"
           isOpen={isInfoTooltipOpen}

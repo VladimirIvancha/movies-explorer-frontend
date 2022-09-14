@@ -1,0 +1,108 @@
+.loginregform {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 396px;
+    width: 100%;
+}
+
+.loginregform__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29.05px;
+    margin: 0;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.loginregform__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.loginregform__text {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12.1px;
+    width: 396px;
+    margin: 0;
+    margin-top: 20px;
+    color: #A0A0A0;
+}
+
+.loginregform__input {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15.73px;
+    width: 366px;
+    height: 16px;
+    margin: 0;
+    margin-top: 10px;
+    color: black;
+    padding: 15px;
+    background-color: #F9F9F9;
+    border-radius: 8px;
+    border-style: none;
+}
+
+.form__input-error {
+    font-size: 12px;
+    line-height: 15px;
+    min-height: 30px;
+    color: #FF0000;
+    opacity: 0;
+    margin: 0;
+    margin-top: 10px;
+    align-self: flex-start;
+}
+
+.form__input-error_active {
+    opacity: 1;
+    margin: 0;
+}
+
+.loginregform__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginregform__button {
+    width: 396px;
+    height: 45px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.94px;
+    color: #FFFFFF;
+    margin: 0;
+    margin-top: 69px;
+    background-color: #FF6838;
+    border-radius: 3px;
+    border-style: none;
+    padding: 0;
+}
+
+.loginregform__link {
+    display: flex;
+    flex-direction: row;
+    width: 396px;
+    margin: 0;
+    margin-top: 16px;    
+    text-decoration: none;
+    justify-content: center;
+}
+
+.loginregform__link-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.94px;
+    color: #A0A0A0;
+    margin: 0;
+    margin-left: 6px;
+}
+
+.loginregform__link-text_red {
+    color: #FF6838;
+}
