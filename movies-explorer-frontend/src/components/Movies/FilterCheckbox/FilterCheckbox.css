@@ -37,6 +37,14 @@
     background-image: url(../../../images/smalltumb-off.svg);
 }
 
+.custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
+    cursor: pointer;
+}
+
+.custom-checkbox:not(:disabled):checked+label:hover::before {
+    cursor: pointer;
+}
+
 .custom-checkbox-text {
     margin: 0;
     margin-left: 14px;

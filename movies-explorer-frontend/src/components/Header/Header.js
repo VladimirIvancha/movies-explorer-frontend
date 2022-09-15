@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useContext } from "react";
 import { Switch, NavLink, withRouter, Route, useLocation } from 'react-router-dom';
 
-function Header({ onSignOut, loggedIn }) {
+function Header({ onSignOut, loggedIn, path }) {
   const location = useLocation()
 
   return (
@@ -11,12 +11,12 @@ function Header({ onSignOut, loggedIn }) {
             <NavLink className="header__logo" to='/'></NavLink>
             <div className={`header__info ${loggedIn && 'header__info_signedup'}`}>
               <NavLink to="/movies"
-                className={`header__link ${loggedIn && 'header__link_active header__link_active_black'}`}
+                className={`header__link header__link_black ${path === "/movies" && 'header__link_selected'}`}
               >
                 Фильмы
               </NavLink>
               <NavLink to="/saved-movies"
-                className={`header__link ${loggedIn && 'header__link_active header__link_active_black'}`}
+                className={`header__link header__link_black ${path === "/saved-movies" && 'header__link_selected'}`}
               >
                 Сохраненные фильмы
               </NavLink>
@@ -34,7 +34,7 @@ function Header({ onSignOut, loggedIn }) {
         <header className="header">
             <NavLink className="header__logo" to='/'></NavLink>
             <div className="header__info">
-              <NavLink className="header__link_active" to='/sign-in'>Регистрация</NavLink>
+              <NavLink className="header__link" to='/sign-in'>Регистрация</NavLink>
               <NavLink className="header__login-button_active" to='/sign-up'>Войти</NavLink>
             </div>
         </header>

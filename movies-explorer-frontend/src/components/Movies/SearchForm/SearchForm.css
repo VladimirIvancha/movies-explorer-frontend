@@ -32,6 +32,10 @@
     height: 34px;
 }
 
+.searchform__find-icon:hover {
+    cursor: pointer;
+}
+
 .searchform__line {
     max-width: 1140px;
     width: calc(100% - 140px);

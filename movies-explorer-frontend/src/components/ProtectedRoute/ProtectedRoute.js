@@ -6,7 +6,8 @@ const ProtectedRoute = ({component: Component, ...props}) => {
   return (
     <>
         <Header
-            loggedIn={props.loggedIn} 
+            loggedIn={props.loggedIn}
+            path={props.path}
         />
         <Route path={props.path}>
         {

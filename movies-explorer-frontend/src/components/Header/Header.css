@@ -60,10 +60,6 @@
 }
 
 .header__link {
-    display: none;
-}
-
-.header__link_active {
     display: flex;
     font-style: normal;
     font-weight: 500;
@@ -74,12 +70,17 @@
     margin-right: 30px;
 }
 
-.header__link_active_black {
+.header__link_black {
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
     color: #000000;
     margin-right: 0;
+}
+
+.header__link_selected {
+    font-weight: 500;
+    text-decoration-line: underline;
 }
 
 .header__link_active:hover {

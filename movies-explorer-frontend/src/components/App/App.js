@@ -3,8 +3,10 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import Profile from "../Profile/Profile"
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
 import * as auth from "../../utils/auth";
 import React, { useState } from "react";
@@ -19,7 +21,7 @@ import unSuccess from "../../images/unSuccess.svg";
 
 function App() {
   const history = useHistory();
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({name: "Владимир"});
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
 //   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 //   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -201,10 +203,10 @@ function App() {
     .finally(() => setIsInfoTooltipOpen(true))
   }
 
-//   function onSignOut() {
-//     localStorage.removeItem("jwt");
-//     setLoggedIn(false);
-//   }
+  function onSignOut() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -236,6 +238,57 @@ function App() {
             loggedIn={loggedIn}
             exact path="/movies"
             component={Movies}
+            // onEditProfile={handleEditProfileClick}
+            // onAddPlace={handleAddPlaceClick}
+            // onEditAvatar={handleEditAvatarClick}
+            // onCardClick={handleCardClick}
+            // onTrashClick={handleTrashButtonClick}
+            // closeAllPopups={closeAllPopups}
+            // onUpdateUser={handleUpdateUser}
+            // onUpdateAvatar={handleUpdateAvatar}
+            // onCardLike={handleCardLike}
+            // onCardDelete={handleCardDelete}
+            // onAddPlaceSubmit={handleAddPlaceSubmit}
+            // cards={cards}
+            // isOpenEditProfile={isOpenEditProfile}
+            // isAddPlacePopupOpen={isAddPlacePopupOpen}
+            // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+            // isDeletePlacePopupOpen={isDeletePlacePopupOpen}
+            // isImagePopupOpen={isImagePopupOpen}
+            // isSubmitInLoading={isSubmitInLoading}
+            // isSubmitSuccess={isSubmitSuccess}
+            // selectedCard={selectedCard}
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            exact path="/saved-movies"
+            component={SavedMovies}
+            // onEditProfile={handleEditProfileClick}
+            // onAddPlace={handleAddPlaceClick}
+            // onEditAvatar={handleEditAvatarClick}
+            // onCardClick={handleCardClick}
+            // onTrashClick={handleTrashButtonClick}
+            // closeAllPopups={closeAllPopups}
+            // onUpdateUser={handleUpdateUser}
+            // onUpdateAvatar={handleUpdateAvatar}
+            // onCardLike={handleCardLike}
+            // onCardDelete={handleCardDelete}
+            // onAddPlaceSubmit={handleAddPlaceSubmit}
+            // cards={cards}
+            // isOpenEditProfile={isOpenEditProfile}
+            // isAddPlacePopupOpen={isAddPlacePopupOpen}
+            // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+            // isDeletePlacePopupOpen={isDeletePlacePopupOpen}
+            // isImagePopupOpen={isImagePopupOpen}
+            // isSubmitInLoading={isSubmitInLoading}
+            // isSubmitSuccess={isSubmitSuccess}
+            // selectedCard={selectedCard}
+          />
+          <ProtectedRoute
+            loggedIn={loggedIn}
+            exact path="/profile"
+            component={Profile}
+            onSignOut={onSignOut}
             // onEditProfile={handleEditProfileClick}
             // onAddPlace={handleAddPlaceClick}
             // onEditAvatar={handleEditAvatarClick}
