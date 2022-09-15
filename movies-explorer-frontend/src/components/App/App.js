@@ -8,7 +8,9 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import * as auth from "../../utils/auth";
+import { initialCards } from "../../utils/initialCards";
 import React, { useState } from "react";
 // import { api } from "../utils/api";
 // import { useEffect } from "react";
@@ -249,7 +251,7 @@ function App() {
             // onCardLike={handleCardLike}
             // onCardDelete={handleCardDelete}
             // onAddPlaceSubmit={handleAddPlaceSubmit}
-            // cards={cards}
+            cards={initialCards}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
@@ -310,6 +312,9 @@ function App() {
             // isSubmitSuccess={isSubmitSuccess}
             // selectedCard={selectedCard}
           />
+          <Route path="*">
+            <NotFoundPage />
+          </Route>
         </Switch>
         {/* <InfoTooltip
           name="infoToolTip"

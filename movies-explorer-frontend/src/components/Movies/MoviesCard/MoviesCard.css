@@ -1,0 +1,93 @@
+.element {
+    display: flex;
+    flex-direction: column;
+    max-width: 282px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.element__image {
+    height: 282px;
+    width: 282px;
+    object-fit: cover;
+}
+
+.element__like-icon {
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/vector-icon-heart.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #ffffff;
+    border: none;
+    padding: 1px;
+    transition: opacity 0.3s;
+}
+.element__like-icon:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.element__like-icon-active {
+    background-image: url(../../../images/vector-icon-heart-black.svg);
+    border: none;
+    background-color: #ffffff;
+}
+
+.element__delete-button {
+    width: 18px;
+    height: 19px;
+    position: absolute;
+    border: none;
+    background-color: #00000000;
+    background-image: url(../../../images/vector-icon-trashbin_white.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    right: 20px;
+    top: 20px;
+    transition: opacity 0.3s;
+}
+.element__delete-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.element__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.element__title {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin-top: 25px;
+    margin-left: 21px;
+    margin-bottom: 25px;
+    text-overflow: ellipsis;
+    max-width: 214px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.element__like-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+}
+
+.element__like-value {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+}

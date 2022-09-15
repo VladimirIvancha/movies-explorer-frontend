@@ -1,7 +1,7 @@
 import React, { useContext, memo } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import SearchForm from "./SearchForm/SearchForm";
-// import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 // import Promo from "./Promo/Promo";
 // import AboutProject from "./AboutProject/AboutProject";
@@ -44,7 +44,9 @@ function Movies({
   return (
     <div className="movies">
         <SearchForm />
-        {/* <MoviesCardList /> */}
+        <MoviesCardList 
+        cards={cards}
+        />
         <Footer />
         {/* <main className="content">
         <section className="profile">
