@@ -1,26 +1,38 @@
-export const initialCards = [
+export let initialCards = [
   {
-    name: "Архыз",
+    nameRU: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+    duration: 107,
+    isLiked: false,
   },
   {
-    name: "Челябинская область",
+    nameRU: "Челябинская область",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+    duration: 107,
+    isLiked: false,
   },
   {
-    name: "Иваново",
+    nameRU: "Иваново",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+    duration: 107,
+    isLiked: true,
   },
   {
-    name: "Камчатка",
+    nameRU: "Камчатка",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+    duration: 107,
+    isLiked: false,
   },
   {
-    name: "Холмогорский район",
+    nameRU: "Холмогорский район",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+    duration: 107,
+    isLiked: false,
   },
   {
-    name: "Байкал",
+    nameRU: "Байкал",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+    duration: 107,
+    isLiked: false,
   },
 ];

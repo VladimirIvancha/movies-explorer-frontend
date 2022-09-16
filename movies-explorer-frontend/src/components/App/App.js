@@ -32,7 +32,7 @@ function App() {
 //   const [isSubmitInLoading, setIsSubmitInLoading] = useState(false);
 //   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 //   const [selectedCard, setSelectedCard] = useState({ name: " ", link: " " });
-//   const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState(initialCards);
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
@@ -50,16 +50,15 @@ function App() {
 //     }
 //   }, [loggedIn]);
 
-//   function handleCardLike(card) {
-//     const isLiked = card.likes.some((i) => i === currentUser._id);
+  function handleCardLike(card) {
+    setCards(
+        cards.map((item) =>
+        item.nameRU === card.nameRU ? { ...item, isLiked: !item.isLiked } : item
+        )
+    );
 
-//     api.changeLikeCardStatus(card._id, !isLiked)
-//       .then((newCard) => {
-//         setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-//       })
-//       .catch((err) => {console.log("Ошибка! Что-то пошло не так!");
-//       });
-//   }
+    console.log(card.isLiked);
+  }
 
 //   function handleCardDelete(card) {
 //     setIsSubmitInLoading(true);
@@ -248,10 +247,10 @@ function App() {
             // closeAllPopups={closeAllPopups}
             // onUpdateUser={handleUpdateUser}
             // onUpdateAvatar={handleUpdateAvatar}
-            // onCardLike={handleCardLike}
+            onCardLike={handleCardLike}
             // onCardDelete={handleCardDelete}
             // onAddPlaceSubmit={handleAddPlaceSubmit}
-            cards={initialCards}
+            cards={cards}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}

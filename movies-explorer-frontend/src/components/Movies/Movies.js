@@ -46,6 +46,7 @@ function Movies({
         <SearchForm />
         <MoviesCardList 
         cards={cards}
+        onCardLike={onCardLike}
         />
         <Footer />
         {/* <main className="content">

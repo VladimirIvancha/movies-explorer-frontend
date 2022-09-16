@@ -85,8 +85,8 @@ function FilterCheckbox({
   
     return (
         <div className="filtercheckbox">
-            <input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes"/>
-            <label for="happy"><p class="custom-checkbox-text">Короткометражки</p></label>
+            <input type="checkbox" className="custom-checkbox" id="happy" name="happy" value="yes"/>
+            <label htmlFor="happy"><p className="custom-checkbox-text">Короткометражки</p></label>
         </div>
     );
   }
