@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext, memo } from "react";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 
 function FilterCheckbox({
-    onClose,
     isOpen,
     onUpdateUser,
+    onShortMoviesFilter,
     isSubmitInLoading,
     isSubmitSuccess,
   }) {
@@ -85,7 +85,7 @@ function FilterCheckbox({
   
     return (
         <div className="filtercheckbox">
-            <input type="checkbox" className="custom-checkbox" id="happy" name="happy" value="yes"/>
+            <input type="checkbox" className="custom-checkbox" id="happy" name="happy" value="yes" onClick={() => onShortMoviesFilter()}/>
             <label htmlFor="happy"><p className="custom-checkbox-text">Короткометражки</p></label>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Switch, NavLink, withRouter, Route, useLocation } from 'react-router-dom';
 
-function Header({ onSignOut, loggedIn, path }) {
+function Header({ loggedIn, path }) {
   const location = useLocation()
 
   return (

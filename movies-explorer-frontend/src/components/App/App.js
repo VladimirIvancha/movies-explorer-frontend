@@ -32,6 +32,7 @@ function App() {
 //   const [isSubmitInLoading, setIsSubmitInLoading] = useState(false);
 //   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 //   const [selectedCard, setSelectedCard] = useState({ name: " ", link: " " });
+  const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [cards, setCards] = useState(initialCards);
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
@@ -56,23 +57,30 @@ function App() {
         item.nameRU === card.nameRU ? { ...item, isLiked: !item.isLiked } : item
         )
     );
-
-    console.log(card.isLiked);
   }
 
-//   function handleCardDelete(card) {
-//     setIsSubmitInLoading(true);
-//     api.deleteCard(card._id)
-//       .then(() => {
-//         setCards(cards.filter((item) => item !== card))
-//         closeAllPopups();
-//       })
-//       .catch((err) => {console.log("Ошибка удаления карточки! Что-то пошло не так");
-//       })
-//       .finally(() => {
-//         setIsSubmitInLoading(false);
-//       });
-//   }
+  function handleShortMoviesFilter(card) {
+    if (IsShortMoviesCheckBoxOn === false) {
+    setCards(
+        cards.filter(function (item) {
+            if(item.duration <= 60) {
+                return true;
+            }
+        })
+    );
+    setIsShortMoviesCheckBoxOn(true);
+    }
+    else {
+        setCards(initialCards);
+        setIsShortMoviesCheckBoxOn(false);
+    }
+  };
+
+  const likedCards = cards.filter(function (item) {
+    if(item.isLiked === true) {
+        return true;
+    }
+  });
 
 //   function handleUpdateUser({ name, about }) {
 //     setIsSubmitInLoading(true);
@@ -90,38 +98,6 @@ function App() {
 //       });
 //   }
 
-//   function handleUpdateAvatar(avatar) {
-//     setIsSubmitInLoading(true);
-//     setIsSubmitSuccess(false);
-//     api.patchUserAvatar(avatar)
-//       .then((user) => {
-//         setCurrentUser(user);
-//         setIsSubmitSuccess(true);
-//         closeAllPopups();
-//       })
-//       .catch((err) => {console.log("Ошибка! Что-то пошло не так!");
-//       })
-//       .finally(() => {
-//         setIsSubmitInLoading(false);
-//       });
-//   }
-
-//   function handleAddPlaceSubmit(card) {
-//     setIsSubmitInLoading(true);
-//     setIsSubmitSuccess(false);
-//     api.postCard(card)
-//       .then((card) => {
-//         setCards([card, ...cards]);
-//         setIsSubmitSuccess(true);
-//         closeAllPopups();
-//       })
-//       .catch((err) => {console.log("Ошибка! Что-то пошло не так!");
-//       })
-//       .finally(() => {
-//         setIsSubmitInLoading(false);
-//       });
-//   }
-
 //   function closeAllPopups() {
 //     setIsOpenEditProfile(false);
 //     setIsAddPlacePopupOpen(false);
@@ -129,32 +105,6 @@ function App() {
 //     setIsImagePopupOpen(false);
 //     setIsDeletePlacePopupOpen(false);
 //     setIsInfoTooltipOpen(false);
-//   }
-
-//   function handleCardClick(card) {
-//     setIsImagePopupOpen(true);
-//     setSelectedCard(card);
-//   }
-
-//   function handleEditProfileClick() {
-//     setIsOpenEditProfile(true);
-//     setIsSubmitInLoading(false);
-//   }
-
-//   function handleAddPlaceClick() {
-//     setIsAddPlacePopupOpen(true);
-//     setIsSubmitInLoading(false);
-//   }
-
-//   function handleEditAvatarClick() {
-//     setIsEditAvatarPopupOpen(true);
-//     setIsSubmitInLoading(false);
-//   }
-
-//   function handleTrashButtonClick(card) {
-//     setIsDeletePlacePopupOpen(true);
-//     setIsSubmitInLoading(false);
-//     setSelectedCard(card);
 //   }
 
 //   useEffect(() => {
@@ -251,6 +201,7 @@ function App() {
             // onCardDelete={handleCardDelete}
             // onAddPlaceSubmit={handleAddPlaceSubmit}
             cards={cards}
+            onShortMoviesFilter={handleShortMoviesFilter}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
@@ -275,7 +226,8 @@ function App() {
             // onCardLike={handleCardLike}
             // onCardDelete={handleCardDelete}
             // onAddPlaceSubmit={handleAddPlaceSubmit}
-            // cards={cards}
+            cards={likedCards}
+            onShortMoviesFilter={handleShortMoviesFilter}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}

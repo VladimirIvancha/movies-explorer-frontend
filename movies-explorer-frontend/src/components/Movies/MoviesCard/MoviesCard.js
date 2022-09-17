@@ -11,14 +11,18 @@ function MoviesCard({ card, onCardClick, onCardLike }) {
     `MoviesCard__like-icon${card.isLiked ? " MoviesCard__like-icon-active" : ""}`
   );
 
-
+  function getTimeFromMins(mins) {
+    let hours = Math.trunc(mins/60);
+	let minutes = mins % 60;
+	return hours + 'ч. ' + minutes + 'м.';
+  };
 
   return (
     <article className="MoviesCard">
         <div className="MoviesCard__wrapper">
             <div className="MoviesCard-info">
                 <h2 className="MoviesCard__title">{card.nameRU}</h2>
-                <h3 className="MoviesCard__duration">{card.duration}</h3>
+                <h3 className="MoviesCard__duration">{getTimeFromMins(card.duration)}</h3>
             </div>
             <div className="MoviesCard__like-wrapper">
                 <button 

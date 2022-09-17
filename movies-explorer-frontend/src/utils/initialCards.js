@@ -2,7 +2,7 @@ export let initialCards = [
   {
     nameRU: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-    duration: 107,
+    duration: 17,
     isLiked: false,
   },
   {
@@ -26,8 +26,8 @@ export let initialCards = [
   {
     nameRU: "Холмогорский район",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-    duration: 107,
-    isLiked: false,
+    duration: 29,
+    isLiked: true,
   },
   {
     nameRU: "Байкал",

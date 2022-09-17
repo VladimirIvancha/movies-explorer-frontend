@@ -8,6 +8,7 @@ function SearchForm({
     onUpdateUser,
     isSubmitInLoading,
     isSubmitSuccess,
+    onShortMoviesFilter,
   }) {
     const currentUser = useContext(CurrentUserContext);
   
@@ -101,7 +102,9 @@ function SearchForm({
                 <div className="searchform__find-icon" onSubmit={handleSubmit}></div>
             </div> 
             <div className="searchform__line"></div>
-            <FilterCheckbox />
+            <FilterCheckbox 
+            onShortMoviesFilter={onShortMoviesFilter}
+            />
         </div>
     );
   }

@@ -24,6 +24,7 @@ function Movies({
   closeAllPopups,
   onUpdateUser,
   onUpdateAvatar,
+  onShortMoviesFilter,
   onCardLike,
   onCardDelete,
   onAddPlaceSubmit,
@@ -43,7 +44,9 @@ function Movies({
 
   return (
     <div className="movies">
-        <SearchForm />
+        <SearchForm 
+        onShortMoviesFilter={onShortMoviesFilter}
+        />
         <MoviesCardList 
         cards={cards}
         onCardLike={onCardLike}

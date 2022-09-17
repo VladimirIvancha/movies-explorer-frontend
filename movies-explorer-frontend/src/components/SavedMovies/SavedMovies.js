@@ -1,7 +1,7 @@
 import React, { useContext, memo } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-// import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 // import Promo from "./Promo/Promo";
 // import AboutProject from "./AboutProject/AboutProject";
@@ -28,6 +28,7 @@ function SavedMovies({
   onCardDelete,
   onAddPlaceSubmit,
   cards,
+  onShortMoviesFilter,
   isOpenEditProfile,
   isAddPlacePopupOpen,
   isEditAvatarPopupOpen,
@@ -43,8 +44,13 @@ function SavedMovies({
 
   return (
     <div className="savedmovies">
-        <SearchForm />
-        {/* <MoviesCardList /> */}
+        <SearchForm 
+        onShortMoviesFilter={onShortMoviesFilter}
+        />
+        <MoviesCardList 
+        cards={cards}
+        onCardLike={onCardLike}
+        />
         <Footer />
         {/* <main className="content">
         <section className="profile">
