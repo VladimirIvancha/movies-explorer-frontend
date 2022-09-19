@@ -21,6 +21,7 @@ function Header({ loggedIn, path }) {
                 Сохраненные фильмы
               </NavLink>
             </div>
+            <div className="header__nav-button"></div>
             <NavLink to="/profile"
                 className={`header__login-button ${loggedIn && 'header__login-button_active header__login-button_active_signedup'}`}
               >

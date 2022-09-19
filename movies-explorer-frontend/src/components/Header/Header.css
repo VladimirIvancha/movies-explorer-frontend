@@ -85,6 +85,10 @@
     display: none;
 }
 
+.header__nav-button {
+    display: none;
+}
+
 .header__login-button_active {
     display: flex;
     width: 76px;
@@ -148,24 +152,25 @@
         display: none;
     }
     .header__login-button_active_signedup {
-        margin-right: 30px;
-        width: 44px;
-        height: 44px;
-        box-shadow: none;
+        display: none;
     }
     .header__text {
         display: none;
     }
     .header__profile-wrapper {
-        width: 44px;
-        height: 44px;
-        border-radius: 0;
-        margin: 0;
+        display: none;
     }
     .header__profile-logo {
-        background-image: url(../../images/navigation_icon-main.svg);
+        display: none;   
+    }
+    .header__nav-button {
+        display: flex;
+        margin-right: 30px;
         width: 44px;
-        height: 44px;   
+        height: 44px;
+        background-image: url(../../images/navigation_icon-main.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 
@@ -183,17 +188,9 @@
     .header__login-button_active {
         font-size: 10px;
     }
-    .header__login-button_active_signedup {
+    .header__nav-button {
         margin-right: 14px;
         width: 40px;
         height: 43px;
-    }
-    .header__profile-wrapper {
-        width: 40px;
-        height: 43px;
-    }
-    .header__profile-logo {
-        width: 40px;
-        height: 43px;   
     }
 }

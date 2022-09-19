@@ -6,14 +6,7 @@
     align-items: center;
     background-color: #FFFFFF;
     width: 100%;
-    /* color: #fff; */
     text-rendering: optimizeLegibility;
     position: relative;
     min-height: 100vh;
-  }
-  
-  @media (max-width: 540px) {
-    .page {
-      padding-top: 28px;
-    }
   }
