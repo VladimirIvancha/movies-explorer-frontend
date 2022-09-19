@@ -25,10 +25,6 @@ function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({name: "Владимир"});
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
-//   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-//   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-//   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-//   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = useState(false);
 //   const [isSubmitInLoading, setIsSubmitInLoading] = useState(false);
 //   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 //   const [selectedCard, setSelectedCard] = useState({ name: " ", link: " " });
@@ -175,14 +171,11 @@ function App() {
           <Route path="/sign-in">
             <Register
               onRegister={handleRegistration}
-              isOpen={isOpenEditProfile}
-              isInfoTooltipOpen={isInfoTooltipOpen}
             />
           </Route>
           <Route path="/sign-up">
             <Login 
             onAuth={handleAuth} 
-            isOpen={isOpenEditProfile} 
             />
           </Route>
           <ProtectedRoute
