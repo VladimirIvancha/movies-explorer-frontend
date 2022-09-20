@@ -79,3 +79,29 @@
     margin-top: 14px;
     object-fit: cover;
 }
+
+@media screen and (max-width: 768px) {
+    .MoviesCard {
+        max-width: 339px;
+    }
+    
+    .MoviesCard__image {
+        height: 190px;
+        width: 339px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .MoviesCard {
+        max-width: 300px;
+    }
+    
+    .MoviesCard__title {
+        max-width: 210px;
+    }
+    
+    .MoviesCard__image {
+        height: 168px;
+        width: 300px;
+    }
+}

@@ -89,6 +89,7 @@
     min-width: 270px;
     height: 327px;
     background-position: top;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -202,6 +203,5 @@
     .aboutMe__info-photo {
         min-width: 292px;
         height: 352px;
-        border-radius: 10px;
     }    
 }

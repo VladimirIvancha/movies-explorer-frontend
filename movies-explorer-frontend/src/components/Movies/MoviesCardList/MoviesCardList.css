@@ -3,16 +3,22 @@
     max-width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(364px, 1fr));
     margin: auto;
-    column-gap: 24px;
-    row-gap: 30px;
+    gap: 30px 24px;
     padding: 0;
     box-sizing: border-box;
     justify-items: center;
 }
 
-/* @media screen and (min-width: 880px) {
+@media screen and (max-width: 768px) {
     .elements {
-      padding: 40px 0 0;
-      gap: 20px 17px;
+        grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
+        gap: 36px 30px;
     }
-} */
+}
+
+@media screen and (max-width: 320px) {
+    .elements {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 16px 24px;
+    }
+}

@@ -60,7 +60,7 @@
     line-height: 15.73px;
     color: #000000;
     margin: 0;
-    margin-top: 220px;
+    margin-top: 180px;
 }
 
 .profile__edit-link:hover {
@@ -88,9 +88,69 @@
     line-height: 45px;
     color: #FFFFFF;
     margin: 0;
-    margin-top: 236px;
+    margin-top: 180px;
+    padding: 0;
 }
 
 .profile__save-button:hover {
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        max-width: 768px;
+    }
+    
+    .profile__title {
+        margin-top: 236px;
+        margin-bottom: 79px;
+    }
+    
+    .profile__edit-link {
+        margin-top: 210px;
+    }
+
+    .profile__save-button {
+        max-width: 260px;
+        margin-top: 210px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .profile {
+        max-width: 320px;
+    }
+    
+    .profile__title {
+        margin-top: 70px;
+        margin-bottom: 63px;
+    }
+    
+    .profile__form {
+        max-width: 260px;
+    }
+    
+    .profile__line {
+        max-width: 260px;
+    }
+    
+    .profile__input {
+        width: 190px;
+    }
+    
+    .profile__edit-link {
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 339px;
+    }
+    
+    .profile__signout-link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+    
+    .profile__save-button {
+        max-width: 260px;
+        margin-top: 339px;
+    }
 }

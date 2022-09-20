@@ -86,7 +86,8 @@ function FilterCheckbox({
     return (
         <div className="filtercheckbox">
             <input type="checkbox" className="custom-checkbox" id="happy" name="happy" value="yes" onClick={() => onShortMoviesFilter()}/>
-            <label htmlFor="happy"><p className="custom-checkbox-text">Короткометражки</p></label>
+            <label htmlFor="happy"></label>
+            <p className="custom-checkbox-text">Короткометражки</p>
         </div>
     );
   }

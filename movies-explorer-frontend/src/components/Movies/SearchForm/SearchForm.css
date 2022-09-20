@@ -22,6 +22,7 @@
     line-height: 34px;
     color: #A0A0A0;
     margin: 0;
+    padding: 0;
 }
 
 .searchform__find-icon {
@@ -43,4 +44,45 @@
     background: #E8E8E8;
     margin-top: 13px;
     align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+    .searchform {
+        max-width: 768px;
+        min-height: 157px;
+        margin-top: 80px;
+    }
+    
+    .searchform__wrapper {
+        width: calc(100% - 60px);
+    }
+    
+    .searchform__line {
+        max-width: 708px;
+        width: calc(100% - 60px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .searchform {
+        max-width: 320px;
+        min-height: 148px;
+        margin-top: 90px;
+    }
+    
+    .searchform__wrapper {
+        width: calc(100% - 28px);
+    }
+    
+    .searchform__item {
+        width: calc(100% - 62px);
+        font-size: 18px;
+        line-height: 22px;
+    }
+    
+    .searchform__line {
+        max-width: 320px;
+        width: calc(100% - 28px);
+        margin-top: 9px;
+    }
 }

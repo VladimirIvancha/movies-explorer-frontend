@@ -6,3 +6,15 @@
     width: 100%;
     margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+    .savedmovies {
+        max-width: 768px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .savedmovies {
+        max-width: 320px;
+    }
+}

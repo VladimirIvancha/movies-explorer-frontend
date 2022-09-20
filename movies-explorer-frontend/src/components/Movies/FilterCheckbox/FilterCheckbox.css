@@ -1,4 +1,7 @@
 .filtercheckbox {
+    display: flex;
+    flex-direction: row;
+    max-width: 1280px;
     margin-top: 32px;
     width: calc(100% - 140px);
     align-self: center;
@@ -51,4 +54,33 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .filtercheckbox {
+        max-width: 768px;
+        flex-direction: row-reverse;
+        margin-top: 29px;
+        width: calc(100% - 60px);
+    }
+
+    .custom-checkbox-text {
+        margin-left: 0;
+        margin-right: 16px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .filtercheckbox {
+        justify-content: center;
+        max-width: 320px;
+        margin-top: 40px;
+        width: calc(100% - 28px);
+    }
+    
+    .custom-checkbox-text {
+        margin-right: 13px;
+        font-size: 11px;
+        line-height: 18px;
+    }
 }
