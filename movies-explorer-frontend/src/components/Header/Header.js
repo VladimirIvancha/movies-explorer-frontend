@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, withRouter, useLocation } from 'react-router-dom';
 import Navigation from "../Navigation/Navigation";
 
-function Header({ loggedIn, path, onNavBtnClick, isNavigationOpen, closeAllPopups }) {
+function Header({ loggedIn, path }) {
   const location = useLocation()
+  const [isNavigationOpen, setisNavigationOpen] = useState(false);
+
+  function handleNavBtnClick() {
+    setisNavigationOpen(true);
+    console.log(isNavigationOpen);
+  }
+
+  function closeAllPopups() {
+    setisNavigationOpen(false);
+  }
 
   return (
     <>
@@ -22,7 +32,7 @@ function Header({ loggedIn, path, onNavBtnClick, isNavigationOpen, closeAllPopup
                 Сохраненные фильмы
               </NavLink>
             </div>
-            <button className="header__nav-button" type="button" onClick={() => onNavBtnClick}></button>
+            <button className="header__nav-button" type="button" onClick={() => handleNavBtnClick()}></button>
             <NavLink to="/profile"
                 className={`header__login-button ${loggedIn && 'header__login-button_active header__login-button_active_signedup'}`}
               >
@@ -42,8 +52,9 @@ function Header({ loggedIn, path, onNavBtnClick, isNavigationOpen, closeAllPopup
         </header>
       }
       <Navigation
-          isOpen={isNavigationOpen}
-          onClose={closeAllPopups}
+            path={path}
+            onClose={closeAllPopups}
+            isOpen={isNavigationOpen}
         />
     </>
   );

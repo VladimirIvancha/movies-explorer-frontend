@@ -34,7 +34,7 @@ function App() {
   const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [cards, setCards] = useState(initialCards);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [isNavigationOpen, setisNavigationOpen] = useState(false);
+  // const [isNavigationOpen, setisNavigationOpen] = useState(false);
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState({ img: "", text: "" });
@@ -82,9 +82,10 @@ function App() {
     }
   });
 
-  function handleNavBtnClick() {
-    setisNavigationOpen(true);
-  }
+  // function handleNavBtnClick() {
+  //   setisNavigationOpen(true);
+  //   console.log(isNavigationOpen);
+  // }
 
 //   function handleUpdateUser({ name, about }) {
 //     setIsSubmitInLoading(true);
@@ -102,9 +103,9 @@ function App() {
 //       });
 //   }
 
-  function closeAllPopups() {
-    setisNavigationOpen(false);
-  }
+  // function closeAllPopups() {
+  //   setisNavigationOpen(false);
+  // }
 
 //   useEffect(() => {
 //     tokenCheck();
@@ -183,9 +184,6 @@ function App() {
           </Route>
           <ProtectedRoute
             loggedIn={loggedIn}
-            onNavBtnClick={handleNavBtnClick}
-            isNavigationOpen={isNavigationOpen}
-            closeAllPopups={closeAllPopups}
             exact path="/movies"
             component={Movies}
             // onEditProfile={handleEditProfileClick}
@@ -201,6 +199,7 @@ function App() {
             // onAddPlaceSubmit={handleAddPlaceSubmit}
             cards={cards}
             onShortMoviesFilter={handleShortMoviesFilter}
+            // onNavBtnClick={handleNavBtnClick}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
@@ -212,9 +211,6 @@ function App() {
           />
           <ProtectedRoute
             loggedIn={loggedIn}
-            onNavBtnClick={handleNavBtnClick}
-            isNavigationOpen={isNavigationOpen}
-            closeAllPopups={closeAllPopups}
             exact path="/saved-movies"
             component={SavedMovies}
             // onEditProfile={handleEditProfileClick}
@@ -230,6 +226,7 @@ function App() {
             // onAddPlaceSubmit={handleAddPlaceSubmit}
             cards={likedCards}
             onShortMoviesFilter={handleShortMoviesFilter}
+            // onNavBtnClick={handleNavBtnClick}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}
@@ -241,9 +238,6 @@ function App() {
           />
           <ProtectedRoute
             loggedIn={loggedIn}
-            onNavBtnClick={handleNavBtnClick}
-            isNavigationOpen={isNavigationOpen}
-            closeAllPopups={closeAllPopups}
             exact path="/profile"
             component={Profile}
             onSignOut={onSignOut}
@@ -259,6 +253,7 @@ function App() {
             // onCardDelete={handleCardDelete}
             // onAddPlaceSubmit={handleAddPlaceSubmit}
             // cards={cards}
+            // onNavBtnClick={handleNavBtnClick}
             // isOpenEditProfile={isOpenEditProfile}
             // isAddPlacePopupOpen={isAddPlacePopupOpen}
             // isEditAvatarPopupOpen={isEditAvatarPopupOpen}

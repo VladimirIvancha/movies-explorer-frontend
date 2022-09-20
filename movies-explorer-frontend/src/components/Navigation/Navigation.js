@@ -4,7 +4,7 @@ import { Switch, NavLink, Route, useLocation } from 'react-router-dom';
 function Navigation({  
     path,
     onClose,
-    isOpen=true
+    isOpen,
 }) {
   const location = useLocation()
   const classNameNavigation = `navigation ${isOpen && 'navigation_is-opened'}`
@@ -13,23 +13,31 @@ function Navigation({
     <div className={classNameNavigation}>
         <div className="navigation__container">
             <button className="navigation__close-btn" type="button" onClick={onClose} ></button>
-            <NavLink className="navigation__main-link" to='/'></NavLink>
-            <NavLink to="/movies"
-                className={`header__link header__link_black ${path === "/movies" && 'header__link_selected'}`}
+            <NavLink to='/' 
+                className="navigation__main-link" 
+                onClick={onClose}
                 >
-                Фильмы
+                    Главная
+                </NavLink>
+            <NavLink to="/movies"
+                className={`header__link header__link_black header__link_nav ${path === "/movies" && 'header__link_selected'}`}
+                onClick={onClose}
+                >
+                    Фильмы
                 </NavLink>
             <NavLink to="/saved-movies"
-                className={`header__link header__link_black ${path === "/saved-movies" && 'header__link_selected'}`}
+                className={`header__link header__link_black header__link_nav ${path === "/saved-movies" && 'header__link_selected'}`}
+                onClick={onClose}
                 >
-                Сохраненные фильмы
+                    Сохраненные фильмы
                 </NavLink>
             <NavLink to="/profile"
-                className={`header__login-button header__login-button_active header__login-button_active_signedup`}
+                className='navigation__login-button'
+                onClick={onClose}
                 >
-                <p className='header__text'>Аккаунт</p>
-                <div className='header__profile-wrapper'>
-                    <div className='header__profile-logo'></div>
+                <p className='navigation__text'>Аккаунт</p>
+                <div className='navigation__profile-wrapper'>
+                    <div className='navigation__profile-logo'></div>
                 </div>
             </NavLink>
         </div>

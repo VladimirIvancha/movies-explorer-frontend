@@ -61,6 +61,7 @@
     line-height: 16px;
     color: #FFFFFF;
     text-decoration: none;
+    margin: 0;
     margin-right: 30px;
 }
 
@@ -70,6 +71,13 @@
     line-height: 18px;
     color: #000000;
     margin-right: 0;
+}
+
+.header__link_nav {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 28px;
 }
 
 .header__link_selected {
@@ -118,6 +126,7 @@
 
 .header__text {
     font-size: 13px;
+    color: #000000;
     margin: 0;
     margin-left: 11px;
 }
@@ -194,6 +203,12 @@
     .header__link {
         font-size: 10px;
         margin-right: 14px;
+    }
+    .header__link_nav {
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 22px;
+        margin-right: 0;
     }
     .header__login-button_active {
         font-size: 10px;
