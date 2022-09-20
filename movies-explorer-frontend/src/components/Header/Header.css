@@ -145,6 +145,10 @@
     .header__logo {
         margin-left: 30px;
     }
+    .header__logo_loginreg {
+        margin-left: 0;
+        margin-top: 232px;
+    }
     .header__info {
         margin-right: 30px;
     }
@@ -171,12 +175,18 @@
         background-image: url(../../images/navigation_icon-main.svg);
         background-repeat: no-repeat;
         background-size: contain;
+        background-color: #FFFFFF;
+        border-style: none;
     }
 }
 
 @media screen and (max-width: 320px) {
     .header__logo {
         margin-left: 14px;
+    }
+    .header__logo_loginreg {
+        margin-top: 56px;
+        align-self: center;
     }
     .header__info {
         margin-right: 14px;

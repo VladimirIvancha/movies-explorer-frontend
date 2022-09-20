@@ -7,3 +7,15 @@
     height: 100%;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 768px) {
+    .register {
+        min-height: 1024px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .register {
+        min-height: 780px;
+    }
+}

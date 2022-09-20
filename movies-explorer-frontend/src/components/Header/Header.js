@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
-import { Switch, NavLink, withRouter, Route, useLocation } from 'react-router-dom';
+import React from "react";
+import { NavLink, withRouter, useLocation } from 'react-router-dom';
+import Navigation from "../Navigation/Navigation";
 
-function Header({ loggedIn, path }) {
+function Header({ loggedIn, path, onNavBtnClick, isNavigationOpen, closeAllPopups }) {
   const location = useLocation()
 
   return (
@@ -21,7 +22,7 @@ function Header({ loggedIn, path }) {
                 Сохраненные фильмы
               </NavLink>
             </div>
-            <div className="header__nav-button"></div>
+            <button className="header__nav-button" type="button" onClick={() => onNavBtnClick}></button>
             <NavLink to="/profile"
                 className={`header__login-button ${loggedIn && 'header__login-button_active header__login-button_active_signedup'}`}
               >
@@ -40,6 +41,10 @@ function Header({ loggedIn, path }) {
             </div>
         </header>
       }
+      <Navigation
+          isOpen={isNavigationOpen}
+          onClose={closeAllPopups}
+        />
     </>
   );
 }

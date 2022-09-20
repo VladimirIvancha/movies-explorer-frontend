@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 396px;
+    max-width: 396px;
     width: 100%;
 }
 
@@ -49,8 +49,8 @@
 }
 
 .form__input-error {
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 10px;
+    line-height: 12px;
     min-height: 30px;
     color: #FF0000;
     opacity: 0;
@@ -109,4 +109,44 @@
 
 .loginregform__link-text_red {
     color: #FF6838;
+}
+
+@media screen and (max-width: 320px) {
+    .loginregform {
+        max-width: 260px;
+    }
+    
+    .loginregform__title {
+        margin-top: 50px;
+        margin-bottom: 60px;
+        align-self: center;
+    }
+    
+    .loginregform__text {
+        width: 260px;
+    }
+    
+    .loginregform__input {
+        width: 230px;
+    }
+    
+    .loginregform__button {
+        width: 260px;
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 127px;
+    }
+    
+    
+    
+    .loginregform__link {
+        width: 260px;
+        margin-top: 14px;
+    }
+    
+    .loginregform__link-text {
+        font-size: 12px;
+        line-height: 15px;
+        margin-left: 7px;
+    }
 }

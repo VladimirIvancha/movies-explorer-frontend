@@ -20,19 +20,23 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // import InfoTooltip from "./InfoTooltip";
 import success from "../../images/success.svg";
 import unSuccess from "../../images/unSuccess.svg";
+import Navigation from "../Navigation/Navigation";
 
 function App() {
   const history = useHistory();
+
   const [currentUser, setCurrentUser] = useState({name: "Владимир"});
-  const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+
 //   const [isSubmitInLoading, setIsSubmitInLoading] = useState(false);
 //   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 //   const [selectedCard, setSelectedCard] = useState({ name: " ", link: " " });
+
   const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [cards, setCards] = useState(initialCards);
-  const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isNavigationOpen, setisNavigationOpen] = useState(false);
+
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState({ img: "", text: "" });
 
 //   useEffect(() => {
@@ -78,6 +82,10 @@ function App() {
     }
   });
 
+  function handleNavBtnClick() {
+    setisNavigationOpen(true);
+  }
+
 //   function handleUpdateUser({ name, about }) {
 //     setIsSubmitInLoading(true);
 //     setIsSubmitSuccess(false);
@@ -94,14 +102,9 @@ function App() {
 //       });
 //   }
 
-//   function closeAllPopups() {
-//     setIsOpenEditProfile(false);
-//     setIsAddPlacePopupOpen(false);
-//     setIsEditAvatarPopupOpen(false);
-//     setIsImagePopupOpen(false);
-//     setIsDeletePlacePopupOpen(false);
-//     setIsInfoTooltipOpen(false);
-//   }
+  function closeAllPopups() {
+    setisNavigationOpen(false);
+  }
 
 //   useEffect(() => {
 //     tokenCheck();
@@ -132,7 +135,7 @@ function App() {
       })
       .then(() => setMessage({ img: success, text: 'Вы успешно зарегистрировались!' }))
       .catch(() => setMessage({img: unSuccess, text: "Что-то пошло не так! Попробуйте ещё раз."}))
-      .finally(() => setIsInfoTooltipOpen(true))
+    //   .finally(() => setIsInfoTooltipOpen(true))
   }
 
   function handleAuth(password, email) {
@@ -147,7 +150,7 @@ function App() {
     })
     .then(() => setMessage({ img: success, text: 'Вы успешно вошли!' }))
     .catch(() => setMessage({ img: unSuccess, text: 'Что-то пошло не так! Попробуйте ещё раз.' }))
-    .finally(() => setIsInfoTooltipOpen(true))
+    // .finally(() => setIsInfoTooltipOpen(true))
   }
 
   function onSignOut() {
@@ -180,6 +183,9 @@ function App() {
           </Route>
           <ProtectedRoute
             loggedIn={loggedIn}
+            onNavBtnClick={handleNavBtnClick}
+            isNavigationOpen={isNavigationOpen}
+            closeAllPopups={closeAllPopups}
             exact path="/movies"
             component={Movies}
             // onEditProfile={handleEditProfileClick}
@@ -206,6 +212,9 @@ function App() {
           />
           <ProtectedRoute
             loggedIn={loggedIn}
+            onNavBtnClick={handleNavBtnClick}
+            isNavigationOpen={isNavigationOpen}
+            closeAllPopups={closeAllPopups}
             exact path="/saved-movies"
             component={SavedMovies}
             // onEditProfile={handleEditProfileClick}
@@ -232,6 +241,9 @@ function App() {
           />
           <ProtectedRoute
             loggedIn={loggedIn}
+            onNavBtnClick={handleNavBtnClick}
+            isNavigationOpen={isNavigationOpen}
+            closeAllPopups={closeAllPopups}
             exact path="/profile"
             component={Profile}
             onSignOut={onSignOut}
@@ -260,13 +272,6 @@ function App() {
             <NotFoundPage />
           </Route>
         </Switch>
-        {/* <InfoTooltip
-          name="infoToolTip"
-          isOpen={isInfoTooltipOpen}
-          img={message.img}
-          title={message.text}
-          onClose={closeAllPopups}
-        /> */}
       </div>
     </CurrentUserContext.Provider>
   );
