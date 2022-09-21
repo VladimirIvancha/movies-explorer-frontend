@@ -16,7 +16,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 360px) {
     .elements {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 16px 24px;

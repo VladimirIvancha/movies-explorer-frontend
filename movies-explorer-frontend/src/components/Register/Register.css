@@ -14,7 +14,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
     .register {
         min-height: 780px;
     }

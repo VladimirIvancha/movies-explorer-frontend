@@ -70,7 +70,8 @@
 }
 
 .loginregform__button {
-    width: 396px;
+    max-width: 396px;
+    width: 100%;
     height: 45px;
     font-weight: 500;
     font-size: 14px;
@@ -86,6 +87,7 @@
 
 .loginregform__button:hover {
     cursor: pointer;
+    opacity: 0.8;
 }
 
 .loginregform__link {
@@ -107,11 +109,15 @@
     margin-left: 6px;
 }
 
+.loginregform__link-text:hover {
+    opacity: 0.7;
+}
+
 .loginregform__link-text_red {
     color: #FF6838;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 440px) {
     .loginregform {
         max-width: 260px;
     }
@@ -131,7 +137,7 @@
     }
     
     .loginregform__button {
-        width: 260px;
+        max-width: 260px;
         font-size: 12px;
         line-height: 15px;
         margin-top: 127px;

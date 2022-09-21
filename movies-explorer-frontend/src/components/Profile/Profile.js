@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { Switch, NavLink, withRouter, Route, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Profile({ onRegister, onSignOut }) {
   const [name, setName] = useState("Владимир");
   const [email, setEmail] = useState("Wil@mail.ru");
-  const [password, setPassword] = useState("");
   const [errorInputEmail, setErrorInputEmail] = useState({
     isValid: true,
     errorMessage: "",
@@ -18,11 +17,6 @@ function Profile({ onRegister, onSignOut }) {
   function handleChange(e) {
     const { value } = e.target;
     (e.target.name === "email") ? setEmail(value) : setName(value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onRegister(password, email);
   }
 
   function handleEditProfileClick() {

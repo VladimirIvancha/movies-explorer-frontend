@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
-import { Switch, NavLink, Route, useLocation } from 'react-router-dom';
+import React from "react";
+import { NavLink } from 'react-router-dom';
 
 function Navigation({  
     path,
     onClose,
     isOpen,
-}) {
-  const location = useLocation()
+}) 
+{
   const classNameNavigation = `navigation ${isOpen && 'navigation_is-opened'}`
 
   return (

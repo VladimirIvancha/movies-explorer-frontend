@@ -34,6 +34,10 @@
 }
 
 .searchform__find-icon:hover {
+    opacity: 0.8;
+}
+
+.searchform__find-icon:hover {
     cursor: pointer;
 }
 

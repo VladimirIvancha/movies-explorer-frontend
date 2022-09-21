@@ -1,7 +1,7 @@
 import LoginRegForm from "../LoginRegForm/LoginRegForm";
 import React, { useState } from "react";
 
-function Login({ onAuth }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,18 +10,12 @@ function Login({ onAuth }) {
     e.target.name === "email" ? setEmail(value) : setPassword(value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onAuth(password, email);
-  }
-
   return (
-    <div className="logIn">
+    <section className="logIn">
       <LoginRegForm
         title="Рады видеть!"
         formsName="logIn"
         buttonText="Войти"
-        onSubmit={handleSubmit}
       >
         <p className="loginregform__text">E-mail</p>
         <input
@@ -48,7 +42,7 @@ function Login({ onAuth }) {
           required
         ></input>
       </LoginRegForm>
-    </div>
+    </section>
   );
 }
 

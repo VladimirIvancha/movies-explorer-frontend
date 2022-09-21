@@ -1,31 +1,9 @@
 import React, { memo } from "react";
 
-function AboutProject({
-    onEditProfile,
-    onAddPlace,
-    onEditAvatar,
-    onCardClick,
-    onTrashClick,
-    closeAllPopups,
-    onUpdateUser,
-    onUpdateAvatar,
-    onCardLike,
-    onCardDelete,
-    onAddPlaceSubmit,
-    cards,
-    isOpenEditProfile,
-    isAddPlacePopupOpen,
-    isEditAvatarPopupOpen,
-    isDeletePlacePopupOpen,
-    isImagePopupOpen,
-    isSubmitInLoading,
-    isSubmitSuccess,
-    selectedCard,
-}) 
-  
+function AboutProject() 
 {  
     return (
-      <div className="aboutProject" title="aboutProject">
+      <article className="aboutProject" title="aboutProject">
         <h2 className="aboutProject__title">О проекте</h2>
         <div className="aboutProject__line"></div>
         <ul className="aboutProject__info">
@@ -40,7 +18,7 @@ function AboutProject({
             <li className="aboutProject__timeline-text">Back-end</li>
             <li className="aboutProject__timeline-text">Front-end</li>
         </ul>
-      </div>
+      </article>
     );
 }
 

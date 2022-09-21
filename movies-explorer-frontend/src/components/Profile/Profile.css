@@ -65,6 +65,7 @@
 
 .profile__edit-link:hover {
     cursor: pointer;
+    opacity: 0.7;
 }
 
 .profile__signout-link {
@@ -75,6 +76,10 @@
     margin-top: 16px;
     color: #EE3465;
     text-decoration: none;
+}
+
+.profile__signout-link:hover {
+    opacity: 0.7;
 }
 
 .profile__save-button {
@@ -94,6 +99,7 @@
 
 .profile__save-button:hover {
     cursor: pointer;
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 768px) {

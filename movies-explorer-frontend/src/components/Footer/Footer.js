@@ -8,8 +8,8 @@ function Footer() {
         <div className="footer__wrapper">
             <p className="footer__copyright">&copy; 2022</p>
             <nav className="footer__links">
-                <a className="footer__link" href="https://practicum.yandex.ru/">Яндекс.Практикум</a>
-                <a className="footer__link" href="https://github.com/">Github</a>
+                <a className="footer__link" target="_blank" rel="noreferrer" href="https://practicum.yandex.ru/">Яндекс.Практикум</a>
+                <a className="footer__link" target="_blank" rel="noreferrer" href="https://github.com/">Github</a>
             </nav>
         </div>
       </footer>

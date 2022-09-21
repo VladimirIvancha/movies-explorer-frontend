@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { NavLink, withRouter, useLocation } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import Navigation from "../Navigation/Navigation";
 
 function Header({ loggedIn, path }) {
-  const location = useLocation()
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
 
   function handleNavBtnClick() {
@@ -52,10 +51,10 @@ function Header({ loggedIn, path }) {
         </header>
       }
       <Navigation
-            path={path}
-            onClose={closeAllPopups}
-            isOpen={isNavigationOpen}
-        />
+        path={path}
+        onClose={closeAllPopups}
+        isOpen={isNavigationOpen}
+      />
     </>
   );
 }

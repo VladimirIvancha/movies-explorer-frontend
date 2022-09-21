@@ -1,47 +1,25 @@
-import React, { useContext, memo } from "react";
+import React, { memo } from "react";
 
-function Portfolio({
-    onEditProfile,
-    onAddPlace,
-    onEditAvatar,
-    onCardClick,
-    onTrashClick,
-    closeAllPopups,
-    onUpdateUser,
-    onUpdateAvatar,
-    onCardLike,
-    onCardDelete,
-    onAddPlaceSubmit,
-    cards,
-    isOpenEditProfile,
-    isAddPlacePopupOpen,
-    isEditAvatarPopupOpen,
-    isDeletePlacePopupOpen,
-    isImagePopupOpen,
-    isSubmitInLoading,
-    isSubmitSuccess,
-    selectedCard,
-}) 
-  
+function Portfolio()
 {  
     return (
-      <div className="portfolio">
+      <article className="portfolio">
         <ul className="portfolio__grid">
             <li className="portfolio__title">Портфолио</li>
             <li className="portfolio__item">
-                <a className="portfolio__link" href="https://github.com/VladimirIvancha">Статичный сайт</a>
-                <a className="portfolio__icon" href="https://github.com/VladimirIvancha">↗</a>
+                <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/VladimirIvancha">Статичный сайт</a>
+                <a className="portfolio__icon" target="_blank" rel="noreferrer" href="https://github.com/VladimirIvancha">↗</a>
             </li>
             <li className="portfolio__item">
-                <a className="portfolio__link" href="https://github.com/VladimirIvancha">Адаптивный сайт</a>
-                <a className="portfolio__icon" href="https://github.com/VladimirIvancha">↗</a>
+                <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/VladimirIvancha">Адаптивный сайт</a>
+                <a className="portfolio__icon" target="_blank" rel="noreferrer" href="https://github.com/VladimirIvancha">↗</a>
             </li>
             <li className="portfolio__item">
-                <a className="portfolio__link" href="https://github.com/VladimirIvancha">Одностраничное приложение</a>
-                <a className="portfolio__icon" href="https://github.com/VladimirIvancha">↗</a>
+                <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/VladimirIvancha">Одностраничное приложение</a>
+                <a className="portfolio__icon" target="_blank" rel="noreferrer" href="https://github.com/VladimirIvancha">↗</a>
             </li>
         </ul>
-      </div>
+      </article>
     );
 }
 

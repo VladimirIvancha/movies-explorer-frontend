@@ -59,6 +59,10 @@
 }
 
 .promo__button:hover {
+    opacity: 0.8;
+}
+
+.promo__button:hover {
     cursor: pointer;
 }
 
@@ -66,7 +70,8 @@
     background-image: url(../../../images/promo_globe.svg);
     background-repeat: no-repeat;
     background-size: contain;
-    min-width: 310px;
+    max-width: 310px;
+    width: 100%;
     min-height: 304px;
     margin-right: 70px;
 }
@@ -110,7 +115,7 @@
         padding-top: 70px;
     }
     .promo__globe {
-        min-width: 210px;
+        max-width: 210px;
         min-height: 206px;
     }
     .promo__info {

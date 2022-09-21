@@ -1,31 +1,9 @@
-import React, { useContext, memo } from "react";
+import React, { memo } from "react";
 
-function Techs({
-    onEditProfile,
-    onAddPlace,
-    onEditAvatar,
-    onCardClick,
-    onTrashClick,
-    closeAllPopups,
-    onUpdateUser,
-    onUpdateAvatar,
-    onCardLike,
-    onCardDelete,
-    onAddPlaceSubmit,
-    cards,
-    isOpenEditProfile,
-    isAddPlacePopupOpen,
-    isEditAvatarPopupOpen,
-    isDeletePlacePopupOpen,
-    isImagePopupOpen,
-    isSubmitInLoading,
-    isSubmitSuccess,
-    selectedCard,
-}) 
-  
+function Techs()
 {  
     return (
-      <div className="techs">
+      <article className="techs">
         <h2 className="techs__title">Технологии</h2>
         <div className="techs__line"></div>
         <h3 className="techs__info-title">7 технологий</h3>
@@ -39,7 +17,7 @@ function Techs({
             <li className="techs__card">Express.js</li>
             <li className="techs__card">MongoDB</li>
         </ul>
-      </div>
+      </article>
     );
 }
 

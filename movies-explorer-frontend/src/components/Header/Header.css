@@ -31,6 +31,10 @@
     margin-left: 70px;
 }
 
+.header__logo:hover {
+    opacity: 0.8;
+}
+
 .header__logo_loginreg {
     margin-left: 0;
     margin-top: 70px;
@@ -65,6 +69,10 @@
     margin-right: 30px;
 }
 
+.header__link:hover {
+    opacity: 0.7;
+}
+
 .header__link_black {
     font-weight: 400;
     font-size: 14px;
@@ -85,16 +93,20 @@
     text-decoration-line: underline;
 }
 
-.header__link_active:hover {
-    opacity: 0.8;
-}
-
 .header__login-button {
     display: none;
 }
 
 .header__nav-button {
     display: none;
+    margin-right: 30px;
+    width: 44px;
+    height: 44px;
+    background-image: url(../../images/navigation_icon-main.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #FFFFFF;
+    border-style: none;
 }
 
 .header__login-button_active {
@@ -113,6 +125,10 @@
     justify-content: center;
 }
 
+.header__login-button_active:hover {
+    opacity: 0.8;
+}
+
 .header__login-button_active_signedup {
     width: 100px;
     height: 32px;
@@ -129,6 +145,10 @@
     color: #000000;
     margin: 0;
     margin-left: 11px;
+}
+
+.header__text:hover {
+    opacity: 0.7;
 }
 
 .header__profile-wrapper {
@@ -178,14 +198,10 @@
     }
     .header__nav-button {
         display: flex;
-        margin-right: 30px;
-        width: 44px;
-        height: 44px;
-        background-image: url(../../images/navigation_icon-main.svg);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-color: #FFFFFF;
-        border-style: none;
+    }
+    .header__nav-button:hover {
+        cursor: pointer;
+        opacity: 0.8;
     }
 }
 
