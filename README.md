@@ -22,3 +22,5 @@ https://github.com/VladimirIvancha/movies-explorer-frontend/pull/1#issue-1381496
 
 ## Ссылка на репозиторий:
 https://github.com/VladimirIvancha/movies-explorer-frontend/tree/level-2
+
+# ВАЖНО!!! ДЛЯ КОРРЕКТНОЙ РАБОТЫ НЕОБХОДИМО УСТАНОВИТЬ ПАКЕТ react-scroll (npm i -S react-scroll)
