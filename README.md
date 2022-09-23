@@ -24,3 +24,5 @@ https://github.com/VladimirIvancha/movies-explorer-frontend/pull/1#issue-1381496
 https://github.com/VladimirIvancha/movies-explorer-frontend/tree/level-2
 
 # ВАЖНО!!! ДЛЯ КОРРЕКТНОЙ РАБОТЫ НЕОБХОДИМО УСТАНОВИТЬ ПАКЕТ react-scroll (npm i -S react-scroll)
+
+## ВАЖНО!!! На данном этапе дипломной работы для проверки верстки страниц логина и регистрации, а также хедера в состоянии "незалогинен" необходимо зайти в профиль и нажать "Выйти" 
