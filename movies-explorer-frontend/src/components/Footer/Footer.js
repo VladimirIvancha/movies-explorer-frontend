@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Footer() {
+function Footer({ needFooter }) {
     return (
-      <footer className="footer">
+      <footer className={`footer ${needFooter && 'footer_active'}`}>
         <p className="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
         <div className="footer__line"></div>
         <div className="footer__wrapper">

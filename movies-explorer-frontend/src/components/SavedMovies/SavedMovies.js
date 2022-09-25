@@ -9,6 +9,8 @@ function SavedMovies({
   onShortMoviesFilter,
 })
 {
+  const cardLikeButtonViewClass = "MoviesCard__like-icon-close"
+
   return (
     <section className="savedmovies">
         <SearchForm 
@@ -17,8 +19,8 @@ function SavedMovies({
         <MoviesCardList 
         cards={cards}
         onCardLike={onCardLike}
+        cardLikeButtonViewClass={cardLikeButtonViewClass}
         />
-        <Footer />
     </section>
   );
 }

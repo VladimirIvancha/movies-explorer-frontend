@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import MoreSection from "./MoreSection/MoreSection";
 import Footer from "../Footer/Footer";
 
 function Movies({
@@ -9,6 +10,8 @@ function Movies({
   cards,
 })
 {
+  const cardLikeButtonViewClass = "MoviesCard__like-icon-active"
+
   return (
     <section className="movies">
         <SearchForm 
@@ -17,8 +20,9 @@ function Movies({
         <MoviesCardList 
         cards={cards}
         onCardLike={onCardLike}
+        cardLikeButtonViewClass={cardLikeButtonViewClass}
         />
-        <Footer />
+        <MoreSection />
     </section>
   );
 }

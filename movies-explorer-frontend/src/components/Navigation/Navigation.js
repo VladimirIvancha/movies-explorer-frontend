@@ -12,34 +12,36 @@ function Navigation({
   return (
     <div className={classNameNavigation}>
         <div className="navigation__container">
-            <button className="navigation__close-btn" type="button" onClick={onClose} ></button>
-            <NavLink to='/' 
-                className="navigation__main-link" 
-                onClick={onClose}
+            <div className="navigation__wrapper">
+                <button className="navigation__close-btn" type="button" onClick={onClose}></button>
+                <NavLink to='/' 
+                    className="navigation__main-link" 
+                    onClick={onClose}
                 >
                     Главная
                 </NavLink>
-            <NavLink to="/movies"
-                className={`header__link header__link_black header__link_nav ${path === "/movies" && 'header__link_selected'}`}
-                onClick={onClose}
+                <NavLink to="/movies"
+                    className={`header__link header__link_black header__link_nav ${path === "/movies" && 'header__link_selected'}`}
+                    onClick={onClose}
                 >
                     Фильмы
                 </NavLink>
-            <NavLink to="/saved-movies"
-                className={`header__link header__link_black header__link_nav ${path === "/saved-movies" && 'header__link_selected'}`}
-                onClick={onClose}
+                <NavLink to="/saved-movies"
+                    className={`header__link header__link_black header__link_nav ${path === "/saved-movies" && 'header__link_selected'}`}
+                    onClick={onClose}
                 >
                     Сохраненные фильмы
                 </NavLink>
+            </div>
             <NavLink to="/profile"
                 className='navigation__login-button'
                 onClick={onClose}
-                >
+            >
                 <p className='navigation__text'>Аккаунт</p>
                 <div className='navigation__profile-wrapper'>
                     <div className='navigation__profile-logo'></div>
                 </div>
-            </NavLink>
+            </NavLink>   
         </div>
     </div>
   );

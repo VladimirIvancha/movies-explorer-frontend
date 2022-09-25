@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 
-function MoviesCard({ card, onCardClick, onCardLike }) {
+function MoviesCard({ card, onCardClick, onCardLike, cardLikeButtonViewClass }) {
 
   const cardLikeButtonClassName = (
-    `MoviesCard__like-icon${card.isLiked ? " MoviesCard__like-icon-active" : ""}`
+    `MoviesCard__like-icon ${card.isLiked ? cardLikeButtonViewClass : ""}`
   );
 
   function getTimeFromMins(mins) {

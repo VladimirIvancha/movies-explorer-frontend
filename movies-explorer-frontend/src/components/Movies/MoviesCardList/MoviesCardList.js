@@ -6,6 +6,7 @@ function MoviesCardList({
   onTrashClick,
   onCardLike,
   cards,
+  cardLikeButtonViewClass,
 }) 
 
 {
@@ -19,6 +20,7 @@ function MoviesCardList({
               onCardClick={onCardClick}
               onCardLike={onCardLike}
               onTrashClick={onTrashClick}
+              cardLikeButtonViewClass={cardLikeButtonViewClass}
             />
           )
         )}

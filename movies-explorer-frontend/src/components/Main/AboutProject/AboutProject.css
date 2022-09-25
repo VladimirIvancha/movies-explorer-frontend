@@ -60,7 +60,7 @@
     gap: 0;
     padding: 0;
     max-width: 1140px;
-    width: 100%;
+    width: calc(100% - 140px);
 }
 
 .aboutProject__timeline :first-child {
@@ -124,10 +124,28 @@
     .aboutProject__timeline {
         margin: 0 50px 0px 50px;
         max-width: 668px;
+        width: calc(100% - 100px)
     }
     
     .aboutProject__timeline-text {
         font-weight: 400;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .aboutProject__timeline {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .aboutProject__timeline-title {
+        font-size: 11px;
+        line-height: 35px;
+    }
+    
+    .aboutProject__timeline-text {
+        font-size: 11px;
+        line-height: 33px;
+        height: 33px;
     }
 }
 
@@ -169,19 +187,8 @@
     }
     
     .aboutProject__timeline {
-        grid-template-columns: 100px 1fr;
         margin: 0 18px 0px 18px;
         max-width: 284px;
-    }
-
-    .aboutProject__timeline-title {
-        font-size: 11px;
-        line-height: 35px;
-    }
-    
-    .aboutProject__timeline-text {
-        font-size: 11px;
-        line-height: 33px;
-        height: 33px;
+        width: calc(100% - 36px);
     }
 }

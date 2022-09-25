@@ -9,7 +9,7 @@ function SearchForm({
     
   
     return (
-        <article className="searchform">
+        <form className="searchform">
             <div className="searchform__wrapper">
                 <input
                     value={searchMovieKeyWords || ''}
@@ -21,13 +21,13 @@ function SearchForm({
                     maxLength="200"
                     required
                 />
-                <div className="searchform__find-icon"></div>
+                <button className="searchform__find-icon"></button>
             </div> 
             <div className="searchform__line"></div>
             <FilterCheckbox 
             onShortMoviesFilter={onShortMoviesFilter}
             />
-        </article>
+        </form>
     );
   }
   

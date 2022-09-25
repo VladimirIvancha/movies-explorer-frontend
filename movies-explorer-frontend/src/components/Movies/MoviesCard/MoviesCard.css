@@ -61,6 +61,7 @@
     background-color: #ffffff;
     border: none;
     transition: opacity 0.3s;
+    padding: 0;
 }
 .MoviesCard__like-icon:hover {
     opacity: 0.5;
@@ -71,6 +72,10 @@
     background-image: url(../../../images/saveMovie-icon-active.svg);
     border: none;
     background-color: #ffffff;
+}
+
+.MoviesCard__like-icon-close {
+    background-image: url(../../../images/saveMovie-icon-X.svg);
 }
 
 .MoviesCard__image {

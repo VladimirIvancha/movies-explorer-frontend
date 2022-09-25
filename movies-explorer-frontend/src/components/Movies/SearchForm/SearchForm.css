@@ -29,8 +29,11 @@
     background-image: url(../../../images/find.svg);
     background-repeat: no-repeat;
     background-size: contain;
+    background-color: #FFFFFF;
     width: 34px;
     height: 34px;
+    padding: 0;
+    border-style: none;
 }
 
 .searchform__find-icon:hover {

@@ -17,21 +17,21 @@ function Header({ loggedIn, path }) {
   return (
     <>
       {loggedIn ?
-        <header className="header_signedup">
+        <header className={`header ${(path === "/movies" && 'header_signedup') || (path === "/saved-movies" && 'header_signedup') || (path === "/profile" && 'header_signedup')}`}>
             <NavLink className="header__logo" to='/'></NavLink>
             <div className={`header__info ${loggedIn && 'header__info_signedup'}`}>
               <NavLink to="/movies"
-                className={`header__link header__link_black ${path === "/movies" && 'header__link_selected'}`}
+                className={`header__link ${(path === "/movies" && 'header__link_black') || (path === "/saved-movies" && 'header__link_black') || (path === "/profile" && 'header__link_black')} ${path === "/movies" && 'header__link_selected'}`}
               >
                 Фильмы
               </NavLink>
               <NavLink to="/saved-movies"
-                className={`header__link header__link_black ${path === "/saved-movies" && 'header__link_selected'}`}
+                className={`header__link ${(path === "/movies" && 'header__link_black') || (path === "/saved-movies" && 'header__link_black') || (path === "/profile" && 'header__link_black')} ${path === "/saved-movies" && 'header__link_selected'}`}
               >
                 Сохраненные фильмы
               </NavLink>
             </div>
-            <button className="header__nav-button" type="button" onClick={() => handleNavBtnClick()}></button>
+            <button className={`header__nav-button ${(path === "/movies" && 'header__nav-button_loggedIn') || (path === "/saved-movies" && 'header__nav-button_loggedIn') || (path === "/profile" && 'header__nav-button_loggedIn')}`} type="button" onClick={() => handleNavBtnClick()}></button>
             <NavLink to="/profile"
                 className={`header__login-button ${loggedIn && 'header__login-button_active header__login-button_active_signedup'}`}
               >

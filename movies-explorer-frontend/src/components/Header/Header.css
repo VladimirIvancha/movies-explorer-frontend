@@ -102,11 +102,16 @@
     margin-right: 30px;
     width: 44px;
     height: 44px;
-    background-image: url(../../images/navigation_icon-main.svg);
+    background-image: url(../../images/navigation_icon-main_white.svg);
     background-repeat: no-repeat;
     background-size: contain;
-    background-color: #FFFFFF;
+    background-color: #465DFF;
     border-style: none;
+}
+
+.header__nav-button_loggedIn {
+    background-color: #FFFFFF;
+    background-image: url(../../images/navigation_icon-main.svg);
 }
 
 .header__login-button_active {
@@ -201,7 +206,7 @@
     }
     .header__nav-button:hover {
         cursor: pointer;
-        opacity: 0.8;
+        opacity: 0.6;
     }
 }
 

@@ -85,6 +85,7 @@ function App() {
             onCardLike={handleCardLike}
             cards={cards}
             onShortMoviesFilter={handleShortMoviesFilter}
+            needFooter={true}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
@@ -92,12 +93,14 @@ function App() {
             component={SavedMovies}
             cards={likedCards}
             onShortMoviesFilter={handleShortMoviesFilter}
+            needFooter={true}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
             exact path="/profile"
             component={Profile}
             onSignOut={onSignOut}
+            needFooter={false}
           />
           <Route path="*">
             <NotFoundPage />
