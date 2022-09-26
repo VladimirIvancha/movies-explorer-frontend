@@ -20,6 +20,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({name: "Владимир"});
 
   const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
+  const [isNavigationOpen, setisNavigationOpen] = useState(false);
+  const [needMoreCards, setNeedMoreCards] = useState(false);
   const [cards, setCards] = useState(initialCards);
   const [loggedIn, setLoggedIn] = useState(true);
 
@@ -41,12 +43,35 @@ function App() {
         })
     );
     setIsShortMoviesCheckBoxOn(true);
-    }
-    else {
-        setCards(initialCards);
-        setIsShortMoviesCheckBoxOn(false);
+    } else {
+      setCards(initialCards);
+      setIsShortMoviesCheckBoxOn(false);
     }
   };
+
+  function resetFilterCheckBox() {
+    setCards(initialCards);
+    setIsShortMoviesCheckBoxOn(false);
+  }
+
+  function handleNavBtnClick() {
+    setisNavigationOpen(true);
+  }
+
+  function showMoreCards() {
+    if (needMoreCards === false) {
+      setNeedMoreCards(true);
+    } else {
+      setNeedMoreCards(false);
+    }
+  }
+
+  function closeAllPopups() {
+    setisNavigationOpen(false);
+    setCards(initialCards);
+    setIsShortMoviesCheckBoxOn(false);
+    setNeedMoreCards(false);
+  }
 
   const likedCards = cards.filter(function (item) {
     if(item.isLiked === true) {
@@ -66,9 +91,14 @@ function App() {
           <Route exact path="/">
             <Header
               loggedIn={loggedIn}
+              isNavigationOpen={isNavigationOpen}
+              handleNavBtnClick={handleNavBtnClick}
+              closeAllPopups={closeAllPopups}
             />
             <Main />
-            <Footer />
+            <Footer 
+              needFooter={true}
+            />
           </Route>
           <Route path="/sign-in">
             <Register
@@ -86,6 +116,12 @@ function App() {
             cards={cards}
             onShortMoviesFilter={handleShortMoviesFilter}
             needFooter={true}
+            resetFilterCheckBox={resetFilterCheckBox}
+            isNavigationOpen={isNavigationOpen}
+            handleNavBtnClick={handleNavBtnClick}
+            closeAllPopups={closeAllPopups}
+            showMoreCards={showMoreCards}
+            needMoreCards={needMoreCards}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
@@ -94,6 +130,12 @@ function App() {
             cards={likedCards}
             onShortMoviesFilter={handleShortMoviesFilter}
             needFooter={true}
+            resetFilterCheckBox={resetFilterCheckBox}
+            isNavigationOpen={isNavigationOpen}
+            handleNavBtnClick={handleNavBtnClick}
+            closeAllPopups={closeAllPopups}
+            showMoreCards={showMoreCards}
+            needMoreCards={needMoreCards}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
@@ -101,6 +143,9 @@ function App() {
             component={Profile}
             onSignOut={onSignOut}
             needFooter={false}
+            isNavigationOpen={isNavigationOpen}
+            handleNavBtnClick={handleNavBtnClick}
+            closeAllPopups={closeAllPopups}
           />
           <Route path="*">
             <NotFoundPage />

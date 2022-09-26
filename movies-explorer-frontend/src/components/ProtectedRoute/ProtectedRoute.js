@@ -9,6 +9,9 @@ const ProtectedRoute = ({component: Component, ...props}) => {
         <Header
             loggedIn={props.loggedIn}
             path={props.path}
+            isNavigationOpen={props.isNavigationOpen}
+            handleNavBtnClick={props.handleNavBtnClick}
+            closeAllPopups={props.closeAllPopups}
         />
         <main className='main'>
             <Route path={props.path}>

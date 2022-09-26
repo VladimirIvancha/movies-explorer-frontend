@@ -1,12 +1,14 @@
 import React, { memo } from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
-import Footer from "../Footer/Footer";
+import MoreSection from "../Movies/MoreSection/MoreSection";
 
 function SavedMovies({
   onCardLike,
   cards,
   onShortMoviesFilter,
+  showMoreCards,
+  needMoreCards,
 })
 {
   const cardLikeButtonViewClass = "MoviesCard__like-icon-close"
@@ -14,12 +16,17 @@ function SavedMovies({
   return (
     <section className="savedmovies">
         <SearchForm 
-        onShortMoviesFilter={onShortMoviesFilter}
+          onShortMoviesFilter={onShortMoviesFilter}
         />
         <MoviesCardList 
-        cards={cards}
-        onCardLike={onCardLike}
-        cardLikeButtonViewClass={cardLikeButtonViewClass}
+          cards={cards}
+          onCardLike={onCardLike}
+          cardLikeButtonViewClass={cardLikeButtonViewClass}
+          needMoreCards={needMoreCards}
+        />
+        <MoreSection 
+          showMoreCards={showMoreCards}
+          needMoreCards={needMoreCards}
         />
     </section>
   );

@@ -7,11 +7,12 @@ function MoviesCardList({
   onCardLike,
   cards,
   cardLikeButtonViewClass,
+  needMoreCards,
 }) 
 
 {
   return (
-    <article className="elements">
+    <article className={`MoviesCardList ${needMoreCards && 'MoviesCardList_opened'}`}>
       {cards.map((card) => 
           (
             <MoviesCard

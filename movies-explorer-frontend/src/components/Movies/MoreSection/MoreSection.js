@@ -1,13 +1,18 @@
 import React, { memo } from "react";
 
 function MoreSection({
-    onShortMoviesFilter,
+    showMoreCards,
+    needMoreCards,
   }) 
   {
+    const moreButtonText = (
+        needMoreCards ? "Свернуть" : "Ещё"
+    )
+
     return (
         <article className="moreSection">
-            <button className="moreSection__button">
-                Ещё
+            <button type="button" className="moreSection__button" onClick={showMoreCards}>
+                {moreButtonText}
             </button>
         </article>
     );
