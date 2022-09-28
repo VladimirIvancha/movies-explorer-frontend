@@ -3,6 +3,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox"
 
 function SearchForm({
     onShortMoviesFilter,
+    IsShortMoviesCheckBoxOn,
   }) 
   {
     const [searchMovieKeyWords, setSearchMovieKeyWords] = useState("");
@@ -25,7 +26,8 @@ function SearchForm({
             </div> 
             <div className="searchform__line"></div>
             <FilterCheckbox 
-            onShortMoviesFilter={onShortMoviesFilter}
+                onShortMoviesFilter={onShortMoviesFilter}
+                IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
             />
         </form>
     );

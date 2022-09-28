@@ -10,7 +10,9 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { initialCards } from "../../utils/initialCards";
-import React, { useState } from "react";
+import { initialCardQuantity } from "../../utils/initialCardQuantity";
+import { likedCards } from "../../utils/likedCards";
+import React, { useState, useEffect } from "react";
 import { memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -21,63 +23,110 @@ function App() {
 
   const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
-  const [needMoreCards, setNeedMoreCards] = useState(false);
+  const [noMoreCards, setNoMoreCards] = useState(false);
   const [cards, setCards] = useState(initialCards);
   const [loggedIn, setLoggedIn] = useState(true);
+  const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
+
+  useEffect(() => {
+    if (cards.length <= renderCardsQuantity) {
+      setNoMoreCards(true);
+    } else {
+      setNoMoreCards(false);
+    }
+  }, [cards.length, renderCardsQuantity]);
+  
+  useEffect(() => {
+    window.addEventListener('resize', updateScreenWidth);
+  });
+
+  function updateScreenWidth() {
+    setNoMoreCards(false);
+    function onResize() {
+      setRenderCardsQuantity(initialCardQuantity);
+    }
+    const resizeTimeout = setTimeout(() => {onResize()}, 500);
+    return () => clearTimeout(resizeTimeout);
+  };
 
   function handleCardLike(card) {
     setCards(
-        cards.map((item) =>
+        cards.slice(0, renderCardsQuantity).map((item) =>
         item.nameRU === card.nameRU ? { ...item, isLiked: !item.isLiked } : item
         )
     );
-  }
-
-  function handleShortMoviesFilter(card) {
-    if (IsShortMoviesCheckBoxOn === false) {
-    setCards(
-        cards.filter(function (item) {
-            if(item.duration <= 60) {
-                return true;
-            }
-        })
-    );
-    setIsShortMoviesCheckBoxOn(true);
-    } else {
-      setCards(initialCards);
-      setIsShortMoviesCheckBoxOn(false);
-    }
-  };
-
-  function resetFilterCheckBox() {
-    setCards(initialCards);
-    setIsShortMoviesCheckBoxOn(false);
   }
 
   function handleNavBtnClick() {
     setisNavigationOpen(true);
   }
 
-  function showMoreCards() {
-    if (needMoreCards === false) {
-      setNeedMoreCards(true);
-    } else {
-      setNeedMoreCards(false);
-    }
+  function handleNavigationClose() {
+    setisNavigationOpen(false);
   }
 
-  function closeAllPopups() {
+  function showMoreCards() {
+    let widthWind = document.querySelector('body').offsetWidth;
+    if (widthWind > 768) {
+      let n=3;
+      let newRenderCardsQuantity = renderCardsQuantity+n
+      setRenderCardsQuantity(newRenderCardsQuantity);
+    } else if (widthWind <= 768) {
+      let n=2;
+      let newRenderCardsQuantity = renderCardsQuantity+n
+      setRenderCardsQuantity(newRenderCardsQuantity);
+    };
+  }
+
+  function resetForMoviesLink() {
     setisNavigationOpen(false);
     setCards(initialCards);
+    setRenderCardsQuantity(initialCardQuantity);
     setIsShortMoviesCheckBoxOn(false);
-    setNeedMoreCards(false);
   }
 
-  const likedCards = cards.filter(function (item) {
-    if(item.isLiked === true) {
-        return true;
+  function resetForSavedMoviesLink() {
+    setisNavigationOpen(false);
+    setCards(likedCards);
+    setRenderCardsQuantity(initialCardQuantity);
+    setIsShortMoviesCheckBoxOn(false);
+  }
+
+  function resetStates() {
+    setisNavigationOpen(false);
+    setRenderCardsQuantity(initialCardQuantity);
+    setIsShortMoviesCheckBoxOn(false);
+  }
+
+  function handleShortMoviesFilter() {
+    if (IsShortMoviesCheckBoxOn === false) {
+      setCards(
+          cards.filter(function (item) {
+              if(item.duration <= 60) {
+                  return true;
+              }
+          })
+      );
+      setIsShortMoviesCheckBoxOn(true);
+    } else {
+      resetForMoviesLink();
     }
-  });
+  };
+
+  function handleShortSavedMoviesFilter() {
+    if (IsShortMoviesCheckBoxOn === false) {
+      setIsShortMoviesCheckBoxOn(true);
+      setCards(
+          cards.filter(function (item) {
+              if(item.duration <= 60) {
+                  return true;
+              }
+          })
+      );
+    } else {
+      resetForSavedMoviesLink();
+    };
+  };
 
   function onSignOut() {
     localStorage.removeItem("jwt");
@@ -93,7 +142,10 @@ function App() {
               loggedIn={loggedIn}
               isNavigationOpen={isNavigationOpen}
               handleNavBtnClick={handleNavBtnClick}
-              closeAllPopups={closeAllPopups}
+              handleNavigationClose={handleNavigationClose}
+              resetStates={resetStates}
+              resetForMoviesLink={resetForMoviesLink}
+              resetForSavedMoviesLink={resetForSavedMoviesLink}
             />
             <Main />
             <Footer 
@@ -116,26 +168,34 @@ function App() {
             cards={cards}
             onShortMoviesFilter={handleShortMoviesFilter}
             needFooter={true}
-            resetFilterCheckBox={resetFilterCheckBox}
+            IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
-            closeAllPopups={closeAllPopups}
+            handleNavigationClose={handleNavigationClose}
+            resetStates={resetStates}
+            resetForMoviesLink={resetForMoviesLink}
+            resetForSavedMoviesLink={resetForSavedMoviesLink}
             showMoreCards={showMoreCards}
-            needMoreCards={needMoreCards}
+            noMoreCards={noMoreCards}
+            renderCardsQuantity={renderCardsQuantity}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
             exact path="/saved-movies"
             component={SavedMovies}
-            cards={likedCards}
-            onShortMoviesFilter={handleShortMoviesFilter}
+            cards={cards}
+            onShortMoviesFilter={handleShortSavedMoviesFilter}
             needFooter={true}
-            resetFilterCheckBox={resetFilterCheckBox}
+            IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
-            closeAllPopups={closeAllPopups}
+            handleNavigationClose={handleNavigationClose}
+            resetStates={resetStates}
+            resetForMoviesLink={resetForMoviesLink}
+            resetForSavedMoviesLink={resetForSavedMoviesLink}
             showMoreCards={showMoreCards}
-            needMoreCards={needMoreCards}
+            noMoreCards={noMoreCards}
+            renderCardsQuantity={renderCardsQuantity}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
@@ -145,7 +205,10 @@ function App() {
             needFooter={false}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
-            closeAllPopups={closeAllPopups}
+            handleNavigationClose={handleNavigationClose}
+            resetStates={resetStates}
+            resetForMoviesLink={resetForMoviesLink}
+            resetForSavedMoviesLink={resetForSavedMoviesLink}
           />
           <Route path="*">
             <NotFoundPage />

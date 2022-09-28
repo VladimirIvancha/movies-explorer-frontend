@@ -8,7 +8,9 @@ function SavedMovies({
   cards,
   onShortMoviesFilter,
   showMoreCards,
-  needMoreCards,
+  noMoreCards,
+  renderCardsQuantity,
+  IsShortMoviesCheckBoxOn,
 })
 {
   const cardLikeButtonViewClass = "MoviesCard__like-icon-close"
@@ -17,16 +19,17 @@ function SavedMovies({
     <section className="savedmovies">
         <SearchForm 
           onShortMoviesFilter={onShortMoviesFilter}
+          IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
         />
         <MoviesCardList 
           cards={cards}
           onCardLike={onCardLike}
           cardLikeButtonViewClass={cardLikeButtonViewClass}
-          needMoreCards={needMoreCards}
+          renderCardsQuantity={renderCardsQuantity}
         />
         <MoreSection 
           showMoreCards={showMoreCards}
-          needMoreCards={needMoreCards}
+          noMoreCards={noMoreCards}
         />
     </section>
   );

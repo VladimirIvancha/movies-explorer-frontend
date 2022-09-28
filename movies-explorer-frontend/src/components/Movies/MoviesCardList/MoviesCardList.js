@@ -7,13 +7,13 @@ function MoviesCardList({
   onCardLike,
   cards,
   cardLikeButtonViewClass,
-  needMoreCards,
+  renderCardsQuantity,
 }) 
 
 {
   return (
-    <article className={`MoviesCardList ${needMoreCards && 'MoviesCardList_opened'}`}>
-      {cards.map((card) => 
+    <article className="MoviesCardList">
+      {cards.slice(0, renderCardsQuantity).map((card) => 
           (
             <MoviesCard
               key={card._id}

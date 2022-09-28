@@ -11,7 +11,10 @@ const ProtectedRoute = ({component: Component, ...props}) => {
             path={props.path}
             isNavigationOpen={props.isNavigationOpen}
             handleNavBtnClick={props.handleNavBtnClick}
-            closeAllPopups={props.closeAllPopups}
+            handleNavigationClose={props.handleNavigationClose}
+            resetStates={props.resetStates}
+            resetForMoviesLink={props.resetForMoviesLink}
+            resetForSavedMoviesLink={props.resetForSavedMoviesLink}
         />
         <main className='main'>
             <Route path={props.path}>

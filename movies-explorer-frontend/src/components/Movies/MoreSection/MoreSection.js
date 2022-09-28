@@ -2,17 +2,16 @@ import React, { memo } from "react";
 
 function MoreSection({
     showMoreCards,
-    needMoreCards,
+    noMoreCards,
   }) 
   {
-    const moreButtonText = (
-        needMoreCards ? "Свернуть" : "Ещё"
-    )
-
     return (
         <article className="moreSection">
-            <button type="button" className="moreSection__button" onClick={showMoreCards}>
-                {moreButtonText}
+            <button type="button" 
+                className={`moreSection__button ${noMoreCards && 'moreSection__button_hidden'}`} 
+                onClick={showMoreCards}
+            >
+                Ещё
             </button>
         </article>
     );
