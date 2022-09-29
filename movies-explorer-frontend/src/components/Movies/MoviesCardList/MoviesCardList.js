@@ -16,7 +16,7 @@ function MoviesCardList({
       {cards.slice(0, renderCardsQuantity).map((card) => 
           (
             <MoviesCard
-              key={card._id}
+              key={card.id}
               card={card}
               onCardClick={onCardClick}
               onCardLike={onCardLike}

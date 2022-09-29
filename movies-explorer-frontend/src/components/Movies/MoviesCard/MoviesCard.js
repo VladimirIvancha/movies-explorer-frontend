@@ -11,6 +11,8 @@ function MoviesCard({
     `MoviesCard__like-icon ${card.isLiked ? cardLikeButtonViewClass : ""}`
   );
 
+  const imageDomain = 'https://api.nomoreparties.co/'
+
   function getTimeFromMins(mins) {
     let hours = Math.trunc(mins/60);
     let minutes = mins % 60;
@@ -34,7 +36,7 @@ function MoviesCard({
             </div>
         </div>
       <img
-        src={card.link}
+        src={`${imageDomain}` + card.image.url}
         className="MoviesCard__image"
         alt={card.nameRU}
         onClick={() => onCardClick(card)}

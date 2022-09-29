@@ -53,6 +53,22 @@
     align-self: center;
 }
 
+.searchform__input-error {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    min-height: 13px;
+    color: #FF004C;
+    opacity: 0;
+    margin: 0;
+    margin-top: 5px;
+    align-self: center;
+}
+
+.searchform__input-error_active {
+    opacity: 1;
+}
+
 @media screen and (max-width: 768px) {
     .searchform {
         max-width: 768px;
@@ -91,5 +107,10 @@
         max-width: 320px;
         width: calc(100% - 28px);
         margin-top: 9px;
+    }
+
+    .searchform__input-error {
+        min-height: 26px;
+        text-align: center;
     }
 }

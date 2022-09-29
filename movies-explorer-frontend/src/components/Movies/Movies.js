@@ -11,6 +11,7 @@ function Movies({
   noMoreCards,
   renderCardsQuantity,
   IsShortMoviesCheckBoxOn,
+  onUpdateMoviesKeyWords,
 })
 {
   const cardLikeButtonViewClass = "MoviesCard__like-icon-active"
@@ -20,6 +21,7 @@ function Movies({
         <SearchForm 
           onShortMoviesFilter={onShortMoviesFilter}
           IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
+          onUpdateMoviesKeyWords={onUpdateMoviesKeyWords}
         />
         <MoviesCardList 
           cards={cards}

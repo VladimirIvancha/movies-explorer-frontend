@@ -9,9 +9,10 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { initialCards } from "../../utils/initialCards";
 import { initialCardQuantity } from "../../utils/initialCardQuantity";
 import { likedCards } from "../../utils/likedCards";
+// import { api } from "../utils/api";
+import { moviesApi } from "../../utils/MoviesApi";
 import React, { useState, useEffect } from "react";
 import { memo } from "react";
 import { Route, Switch } from "react-router-dom";
@@ -24,9 +25,23 @@ function App() {
   const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
   const [noMoreCards, setNoMoreCards] = useState(false);
-  const [cards, setCards] = useState(initialCards);
+  const [cards, setCards] = useState([]);
+  const [initialCards, setInitialCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
+
+  useEffect(() => {
+    if (loggedIn && !IsShortMoviesCheckBoxOn) {
+      Promise.all([moviesApi.getInitialCards()])
+        .then(([cards]) => {
+          setInitialCards(cards);
+          setCards(cards);
+        })
+        .catch((err) => {console.log("Ошибка! Что-то пошло не так!")});
+    }
+  }, [loggedIn, 
+      IsShortMoviesCheckBoxOn,
+    ]);
 
   useEffect(() => {
     if (cards.length <= renderCardsQuantity) {
@@ -51,9 +66,9 @@ function App() {
 
   function handleCardLike(card) {
     setCards(
-        cards.slice(0, renderCardsQuantity).map((item) =>
+      cards.slice(0, renderCardsQuantity).map((item) =>
         item.nameRU === card.nameRU ? { ...item, isLiked: !item.isLiked } : item
-        )
+      )
     );
   }
 
@@ -80,7 +95,7 @@ function App() {
 
   function resetForMoviesLink() {
     setisNavigationOpen(false);
-    setCards(initialCards);
+    setCards(cards);
     setRenderCardsQuantity(initialCardQuantity);
     setIsShortMoviesCheckBoxOn(false);
   }
@@ -101,9 +116,9 @@ function App() {
   function handleShortMoviesFilter() {
     if (IsShortMoviesCheckBoxOn === false) {
       setCards(
-          cards.filter(function (item) {
-              if(item.duration <= 60) {
-                  return true;
+        cards.filter(function (item) {
+              if(item.duration <= 40) {
+                return true;
               }
           })
       );
@@ -118,7 +133,7 @@ function App() {
       setIsShortMoviesCheckBoxOn(true);
       setCards(
           cards.filter(function (item) {
-              if(item.duration <= 60) {
+              if(item.duration <= 40) {
                   return true;
               }
           })
@@ -132,6 +147,17 @@ function App() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
   }
+
+  function handleUpdateMoviesKeyWords({ keyWords }) {
+    setCards(
+      initialCards.filter(function (item) {
+        if(item.nameRU.toLowerCase().includes(keyWords)) {
+          return true;
+        }
+      })
+    );  
+  }
+  
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -178,6 +204,7 @@ function App() {
             showMoreCards={showMoreCards}
             noMoreCards={noMoreCards}
             renderCardsQuantity={renderCardsQuantity}
+            onUpdateMoviesKeyWords={handleUpdateMoviesKeyWords}
           />
           <ProtectedRoute
             loggedIn={loggedIn}

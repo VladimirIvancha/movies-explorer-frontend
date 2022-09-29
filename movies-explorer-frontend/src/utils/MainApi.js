@@ -35,19 +35,6 @@ class Api {
         }),
       }).then(this._checkResponse);
     }
-    
-    patchUserAvatar(avatar) {
-      return fetch(`${this._baseUrl}/users/me/avatar`, {
-        method: "PATCH",
-        headers: {
-          "Authorization": getToken(),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          avatar: avatar,
-        }),
-      }).then(this._checkResponse);
-    }
   
     getInitialCards() {
       return fetch(`${this._baseUrl}/cards`, {
@@ -92,15 +79,15 @@ class Api {
         }
       }).then(this._checkResponse);
     }
-  }
+}
   
-  const getToken = () => {
+const getToken = () => {
     return `Bearer ${localStorage.getItem('jwt')}`;
-  }
+}
     
-  const api = new Api({
-    baseUrl: "https://api.vivanchafrontend.mestoproject.nomoredomains.sbs",
-  })
+const api = new Api({
+    baseUrl: "api.m.explorer.nomoredomains.sbs",
+})
     
-  export {api};
+export {api};
     
