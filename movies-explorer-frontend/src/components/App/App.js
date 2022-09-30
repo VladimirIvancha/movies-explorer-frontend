@@ -11,37 +11,40 @@ import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { initialCardQuantity } from "../../utils/initialCardQuantity";
 import { likedCards } from "../../utils/likedCards";
-// import { api } from "../utils/api";
+import * as auth from "../../utils/auth.js";
+import { mainApi } from "../../utils/mainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 import React, { useState, useEffect } from "react";
 import { memo } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
-
-  const [currentUser, setCurrentUser] = useState({name: "Владимир"});
+  const history = useHistory();
+  const [currentUser, setCurrentUser] = useState({});
 
   const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
   const [noMoreCards, setNoMoreCards] = useState(false);
   const [cards, setCards] = useState([]);
+  const [email, setEmail] = useState("");
   const [initialCards, setInitialCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (loggedIn && !IsShortMoviesCheckBoxOn) {
-      Promise.all([moviesApi.getInitialCards()])
-        .then(([cards]) => {
+    if (loggedIn) {
+      Promise.all([mainApi.getUserInfo(), moviesApi.getInitialCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
           setInitialCards(cards);
           setCards(cards);
         })
         .catch((err) => {console.log("Ошибка! Что-то пошло не так!")});
+      tokenCheck();
     }
-  }, [loggedIn, 
-      IsShortMoviesCheckBoxOn,
-    ]);
+  }, [loggedIn]);
 
   useEffect(() => {
     if (cards.length <= renderCardsQuantity) {
@@ -143,11 +146,6 @@ function App() {
     };
   };
 
-  function onSignOut() {
-    localStorage.removeItem("jwt");
-    setLoggedIn(false);
-  }
-
   function handleUpdateMoviesKeyWords({ keyWords }) {
     setCards(
       initialCards.filter(function (item) {
@@ -157,8 +155,56 @@ function App() {
       })
     );  
   }
-  
 
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth.getCheckToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setEmail(res.email);
+            history.push("/");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  function handleAuth(email, password) {
+    auth.authorize(email, password)
+    .then((token) => {
+      auth.getCheckToken(token)
+        .then((res) => {
+          setLoggedIn(true);
+          // setEmail(res.email);
+          history.push("/");
+        })
+    })
+    .then(() => setMessage('Вы успешно вошли!'))
+    .catch(() => setMessage('Что-то пошло не так! Попробуйте ещё раз.'))
+  }
+
+  function handleRegistration(email, password, name) {
+    auth.register(email, password, name)
+      .then((res) => {
+        if (res.statusCode !== 201)
+          // setEmail(res.email)
+        history.push('/sign-in')
+      })
+      .then(() => setMessage('Вы успешно зарегистрировались!'))
+      .catch(() => setMessage('Что-то пошло не так! Попробуйте ещё раз.'))
+  }
+
+  function onSignOut() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+  }
+  
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -178,12 +224,14 @@ function App() {
               needFooter={true}
             />
           </Route>
-          <Route path="/sign-in">
+          <Route path="/sign-up">
             <Register
+              onRegister={handleRegistration}
             />
           </Route>
-          <Route path="/sign-up">
+          <Route path="/sign-in">
             <Login
+              onAuth={handleAuth}
             />
           </Route>
           <ProtectedRoute

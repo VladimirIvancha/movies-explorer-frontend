@@ -1,11 +1,12 @@
 import LoginRegForm from "../LoginRegForm/LoginRegForm";
 import React, { useState } from "react";
 
-function Register() 
+function Register({ onRegister }) 
 {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [errorInputEmail, setErrorInputEmail] = useState({
     isValid: true,
     errorMessage: "",
@@ -17,12 +18,19 @@ function Register()
     (e.target.name === "email") ? setEmail(value) : (e.target.name === "name") ? setName(value) : setPassword(value);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onRegister(email, password, name);
+  }
+
   return (
     <section className="register">
       <LoginRegForm
         title="Добро пожаловать!"
         formsName="register"
         buttonText="Зарегистрироваться"
+        onSubmit={handleSubmit}
       >
         <p className="loginregform__text">Имя</p>
         <input

@@ -1,4 +1,4 @@
-class Api {
+class MainApi {
     constructor({ baseUrl, headers }) {
       this._baseUrl = baseUrl;
       this._headers = headers;
@@ -85,9 +85,9 @@ const getToken = () => {
     return `Bearer ${localStorage.getItem('jwt')}`;
 }
     
-const api = new Api({
-    baseUrl: "api.m.explorer.nomoredomains.sbs",
+const mainApi = new MainApi({
+    baseUrl: "https://api.m.explorer.nomoredomains.sbs",
 })
     
-export {api};
+export {mainApi};
     

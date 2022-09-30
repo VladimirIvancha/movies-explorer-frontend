@@ -51,8 +51,8 @@ function Header({
         <header className="header">
             <NavLink className="header__logo" to='/'></NavLink>
             <div className="header__info">
-              <NavLink className="header__link" to='/sign-in'>Регистрация</NavLink>
-              <NavLink className="header__login-button_active" to='/sign-up'>Войти</NavLink>
+              <NavLink className="header__link" to='/sign-up'>Регистрация</NavLink>
+              <NavLink className="header__login-button_active" to='/sign-in'>Войти</NavLink>
             </div>
         </header>
       }

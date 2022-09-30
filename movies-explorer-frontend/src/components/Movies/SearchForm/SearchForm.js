@@ -24,13 +24,10 @@ function SearchForm({
     }
 
     function handleSubmit(e) {
-        e.preventDefault();
-        console.log(searchMovieKeyWords)
-    
+        e.preventDefault();   
         onUpdateMoviesKeyWords({
             keyWords: searchMovieKeyWords,
         });
-
         setIsEmptyMovieKeyWords(false);
     }
   

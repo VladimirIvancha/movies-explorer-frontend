@@ -1,7 +1,7 @@
 import LoginRegForm from "../LoginRegForm/LoginRegForm";
 import React, { useState } from "react";
 
-function Login() {
+function Login({ onAuth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,12 +10,18 @@ function Login() {
     e.target.name === "email" ? setEmail(value) : setPassword(value);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    onAuth(email, password);
+  }
+
   return (
     <section className="logIn">
       <LoginRegForm
         title="Рады видеть!"
         formsName="logIn"
         buttonText="Войти"
+        onSubmit={handleSubmit}
       >
         <p className="loginregform__text">E-mail</p>
         <input
