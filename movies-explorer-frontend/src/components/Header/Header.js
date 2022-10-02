@@ -9,8 +9,6 @@ function Header({
   handleNavBtnClick,
   handleNavigationClose,
   resetStates,
-  resetForMoviesLink,
-  resetForSavedMoviesLink,
 }) {
   return (
     <>
@@ -22,13 +20,13 @@ function Header({
             </NavLink>
             <div className={`header__info ${loggedIn && 'header__info_signedup'}`}>
               <NavLink to="/movies"
-                onClick={resetForMoviesLink}
+                onClick={resetStates}
                 className={`header__link ${(path === "/movies" && 'header__link_black') || (path === "/saved-movies" && 'header__link_black') || (path === "/profile" && 'header__link_black')} ${path === "/movies" && 'header__link_selected'}`}
               >
                 Фильмы
               </NavLink>
               <NavLink to="/saved-movies"
-                onClick={resetForSavedMoviesLink}
+                onClick={resetStates}
                 className={`header__link ${(path === "/movies" && 'header__link_black') || (path === "/saved-movies" && 'header__link_black') || (path === "/profile" && 'header__link_black')} ${path === "/saved-movies" && 'header__link_selected'}`}
               >
                 Сохраненные фильмы
@@ -59,8 +57,6 @@ function Header({
       <Navigation
         path={path}
         resetStates={resetStates}
-        resetForMoviesLink={resetForMoviesLink}
-        resetForSavedMoviesLink={resetForSavedMoviesLink}
         handleNavigationClose={handleNavigationClose}
         isOpen={isNavigationOpen}
       />

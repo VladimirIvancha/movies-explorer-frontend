@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.m.explorer.nomoredomains.sbs'
+export const BASE_URL = 'http://localhost:3001'
 const handleResponse = response => response.ok ? response.json() : Promise.reject('Ошибка на сервере: ' + response.status + ' - ' + response.statusText)
 
 export const register = (email, password, name) => {

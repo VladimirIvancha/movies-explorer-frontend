@@ -13,8 +13,6 @@ const ProtectedRoute = ({component: Component, ...props}) => {
             handleNavBtnClick={props.handleNavBtnClick}
             handleNavigationClose={props.handleNavigationClose}
             resetStates={props.resetStates}
-            resetForMoviesLink={props.resetForMoviesLink}
-            resetForSavedMoviesLink={props.resetForSavedMoviesLink}
         />
         <main className='main'>
             <Route path={props.path}>

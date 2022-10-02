@@ -11,7 +11,7 @@ class MoviesApi {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    getInitialCards() {
+    getInitialMovies() {
         return fetch(`${this._baseUrl}/`, {
           headers: {
             'Content-Type': 'application/json'

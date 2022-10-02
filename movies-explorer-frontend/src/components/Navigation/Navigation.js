@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 function Navigation({  
     path,
     resetStates,
-    resetForMoviesLink,
-    resetForSavedMoviesLink,
     handleNavigationClose,
     isOpen,
 }) 
@@ -25,13 +23,13 @@ function Navigation({
                 </NavLink>
                 <NavLink to="/movies"
                     className={`header__link header__link_black header__link_nav ${path === "/movies" && 'header__link_selected'}`}
-                    onClick={resetForMoviesLink}
+                    onClick={resetStates}
                 >
                     Фильмы
                 </NavLink>
                 <NavLink to="/saved-movies"
                     className={`header__link header__link_black header__link_nav ${path === "/saved-movies" && 'header__link_selected'}`}
-                    onClick={resetForSavedMoviesLink}
+                    onClick={resetStates}
                 >
                     Сохраненные фильмы
                 </NavLink>

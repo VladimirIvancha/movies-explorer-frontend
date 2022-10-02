@@ -9,71 +9,36 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { initialCardQuantity } from "../../utils/initialCardQuantity";
-import { likedCards } from "../../utils/likedCards";
 import * as auth from "../../utils/auth.js";
-import { mainApi } from "../../utils/mainApi";
-import { moviesApi } from "../../utils/MoviesApi";
+import { mainApi } from "../../utils/MainApi";
 import React, { useState, useEffect } from "react";
 import { memo } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { initialCardQuantity } from "../../utils/initialCardQuantity";
 
 function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
-
-  const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
-  const [noMoreCards, setNoMoreCards] = useState(false);
-  const [cards, setCards] = useState([]);
-  const [email, setEmail] = useState("");
-  const [initialCards, setInitialCards] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
+  const [loggedIn, setLoggedIn] = useState(false);
+  
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (loggedIn) {
-      Promise.all([mainApi.getUserInfo(), moviesApi.getInitialCards()])
-        .then(([user, cards]) => {
-          setCurrentUser(user);
-          setInitialCards(cards);
-          setCards(cards);
+      mainApi.getUserInfo(loggedIn)
+        .then((user) => {
+          if (user) {
+            localStorage.setItem('userId', user._id);
+            setCurrentUser(user);
+          };
         })
         .catch((err) => {console.log("Ошибка! Что-то пошло не так!")});
       tokenCheck();
     }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    if (cards.length <= renderCardsQuantity) {
-      setNoMoreCards(true);
-    } else {
-      setNoMoreCards(false);
-    }
-  }, [cards.length, renderCardsQuantity]);
-  
-  useEffect(() => {
-    window.addEventListener('resize', updateScreenWidth);
-  });
-
-  function updateScreenWidth() {
-    setNoMoreCards(false);
-    function onResize() {
-      setRenderCardsQuantity(initialCardQuantity);
-    }
-    const resizeTimeout = setTimeout(() => {onResize()}, 500);
-    return () => clearTimeout(resizeTimeout);
-  };
-
-  function handleCardLike(card) {
-    setCards(
-      cards.slice(0, renderCardsQuantity).map((item) =>
-        item.nameRU === card.nameRU ? { ...item, isLiked: !item.isLiked } : item
-      )
-    );
-  }
+  }, []);
 
   function handleNavBtnClick() {
     setisNavigationOpen(true);
@@ -81,79 +46,6 @@ function App() {
 
   function handleNavigationClose() {
     setisNavigationOpen(false);
-  }
-
-  function showMoreCards() {
-    let widthWind = document.querySelector('body').offsetWidth;
-    if (widthWind > 768) {
-      let n=3;
-      let newRenderCardsQuantity = renderCardsQuantity+n
-      setRenderCardsQuantity(newRenderCardsQuantity);
-    } else if (widthWind <= 768) {
-      let n=2;
-      let newRenderCardsQuantity = renderCardsQuantity+n
-      setRenderCardsQuantity(newRenderCardsQuantity);
-    };
-  }
-
-  function resetForMoviesLink() {
-    setisNavigationOpen(false);
-    setCards(cards);
-    setRenderCardsQuantity(initialCardQuantity);
-    setIsShortMoviesCheckBoxOn(false);
-  }
-
-  function resetForSavedMoviesLink() {
-    setisNavigationOpen(false);
-    setCards(likedCards);
-    setRenderCardsQuantity(initialCardQuantity);
-    setIsShortMoviesCheckBoxOn(false);
-  }
-
-  function resetStates() {
-    setisNavigationOpen(false);
-    setRenderCardsQuantity(initialCardQuantity);
-    setIsShortMoviesCheckBoxOn(false);
-  }
-
-  function handleShortMoviesFilter() {
-    if (IsShortMoviesCheckBoxOn === false) {
-      setCards(
-        cards.filter(function (item) {
-              if(item.duration <= 40) {
-                return true;
-              }
-          })
-      );
-      setIsShortMoviesCheckBoxOn(true);
-    } else {
-      resetForMoviesLink();
-    }
-  };
-
-  function handleShortSavedMoviesFilter() {
-    if (IsShortMoviesCheckBoxOn === false) {
-      setIsShortMoviesCheckBoxOn(true);
-      setCards(
-          cards.filter(function (item) {
-              if(item.duration <= 40) {
-                  return true;
-              }
-          })
-      );
-    } else {
-      resetForSavedMoviesLink();
-    };
-  };
-
-  function handleUpdateMoviesKeyWords({ keyWords }) {
-    setCards(
-      initialCards.filter(function (item) {
-        if(item.nameRU.toLowerCase().includes(keyWords)) {
-          return true;
-        }
-      })
-    );  
   }
 
   useEffect(() => {
@@ -167,7 +59,6 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            setEmail(res.email);
             history.push("/");
           }
         })
@@ -181,7 +72,6 @@ function App() {
       auth.getCheckToken(token)
         .then((res) => {
           setLoggedIn(true);
-          // setEmail(res.email);
           history.push("/");
         })
     })
@@ -200,9 +90,9 @@ function App() {
       .catch(() => setMessage('Что-то пошло не так! Попробуйте ещё раз.'))
   }
 
-  function onSignOut() {
-    localStorage.removeItem("jwt");
-    setLoggedIn(false);
+  function handleResetStates() {
+    setisNavigationOpen(false);
+    setRenderCardsQuantity(initialCardQuantity);
   }
   
   return (
@@ -215,9 +105,7 @@ function App() {
               isNavigationOpen={isNavigationOpen}
               handleNavBtnClick={handleNavBtnClick}
               handleNavigationClose={handleNavigationClose}
-              resetStates={resetStates}
-              resetForMoviesLink={resetForMoviesLink}
-              resetForSavedMoviesLink={resetForSavedMoviesLink}
+              resetStates={handleResetStates}
             />
             <Main />
             <Footer 
@@ -238,52 +126,36 @@ function App() {
             loggedIn={loggedIn}
             exact path="/movies"
             component={Movies}
-            onCardLike={handleCardLike}
-            cards={cards}
-            onShortMoviesFilter={handleShortMoviesFilter}
             needFooter={true}
-            IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
             handleNavigationClose={handleNavigationClose}
-            resetStates={resetStates}
-            resetForMoviesLink={resetForMoviesLink}
-            resetForSavedMoviesLink={resetForSavedMoviesLink}
-            showMoreCards={showMoreCards}
-            noMoreCards={noMoreCards}
+            resetStates={handleResetStates}
             renderCardsQuantity={renderCardsQuantity}
-            onUpdateMoviesKeyWords={handleUpdateMoviesKeyWords}
+            setRenderCardsQuantity={setRenderCardsQuantity}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
             exact path="/saved-movies"
             component={SavedMovies}
-            cards={cards}
-            onShortMoviesFilter={handleShortSavedMoviesFilter}
             needFooter={true}
-            IsShortMoviesCheckBoxOn={IsShortMoviesCheckBoxOn}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
             handleNavigationClose={handleNavigationClose}
-            resetStates={resetStates}
-            resetForMoviesLink={resetForMoviesLink}
-            resetForSavedMoviesLink={resetForSavedMoviesLink}
-            showMoreCards={showMoreCards}
-            noMoreCards={noMoreCards}
+            resetStates={handleResetStates}
             renderCardsQuantity={renderCardsQuantity}
+            setRenderCardsQuantity={setRenderCardsQuantity}
           />
           <ProtectedRoute
             loggedIn={loggedIn}
             exact path="/profile"
             component={Profile}
-            onSignOut={onSignOut}
             needFooter={false}
+            setLoggedIn={setLoggedIn}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
             handleNavigationClose={handleNavigationClose}
-            resetStates={resetStates}
-            resetForMoviesLink={resetForMoviesLink}
-            resetForSavedMoviesLink={resetForSavedMoviesLink}
+            resetStates={handleResetStates}
           />
           <Route path="*">
             <NotFoundPage />

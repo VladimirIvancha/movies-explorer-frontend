@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { NavLink } from 'react-router-dom';
+import mainApi from '../../utils/MainApi';
+import { useHistory } from 'react-router-dom';
 
-function Profile({ onRegister, onSignOut }) {
+function Profile({ onRegister, setLoggedIn }) {
   const [name, setName] = useState("Владимир");
   const [email, setEmail] = useState("Wil@mail.ru");
   const [errorInputEmail, setErrorInputEmail] = useState({
@@ -13,6 +15,9 @@ function Profile({ onRegister, onSignOut }) {
   const [isEditProfileActive, setIsEditProfileActive] = useState(true);
   const [isInputDisabled, setIsInputDisabled] = useState(true);
   const [isInputRequired, setIsInputRequired] = useState(false);
+
+  const history = useHistory();
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   function handleChange(e) {
     const { value } = e.target;
@@ -25,8 +30,12 @@ function Profile({ onRegister, onSignOut }) {
     setIsInputRequired(true)
   }
 
-  {
-    const currentUser = useContext(CurrentUserContext);
+  const handleSignout = () => {
+    setCurrentUser({});
+    localStorage.clear();
+    history.push("/");
+    setLoggedIn(false);
+  }
 
   return (
     <div className="profile">
@@ -76,7 +85,7 @@ function Profile({ onRegister, onSignOut }) {
                     <p className="profile__edit-link" onClick={handleEditProfileClick}>Редактировать</p>
                     <NavLink to="/"
                         className="profile__signout-link"
-                        onClick={onSignOut}
+                        onClick={handleSignout}
                     >
                     Выйти из аккаунта
                     </NavLink>
@@ -89,7 +98,6 @@ function Profile({ onRegister, onSignOut }) {
         </>
     </div>
   );
-  }
 }
 
 export default Profile;

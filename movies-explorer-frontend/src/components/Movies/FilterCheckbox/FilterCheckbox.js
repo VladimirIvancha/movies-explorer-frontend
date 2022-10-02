@@ -1,21 +1,21 @@
 import React, { memo } from "react";
 
 function FilterCheckbox({
-    onShortMoviesFilter,
-    IsShortMoviesCheckBoxOn,
+    value,
+    onChange,
   }) 
   {
     return (
-        <div className="filtercheckbox">
-            <input 
-              type="checkbox" 
-              className={`custom-checkbox ${IsShortMoviesCheckBoxOn && 'custom-checkbox_active'}`}
-              id="happy" 
-              name="happy" 
-              value="yes"
-              onClick={() => onShortMoviesFilter()}
+        <div className="filtercheckbox" htmlFor="shorts">
+            <input
+              className={`custom-checkbox ${value && 'custom-checkbox_active'}`}
+              type="checkbox"
+              name="shorts"
+              id="shorts" 
+              checked={value}
+              onChange={onChange}
             />
-            <label htmlFor="happy"></label>
+            <label htmlFor="shorts"></label>
             <p className="custom-checkbox-text">Короткометражки</p>
         </div>
     );

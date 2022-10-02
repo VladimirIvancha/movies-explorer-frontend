@@ -36,8 +36,8 @@ class MainApi {
       }).then(this._checkResponse);
     }
   
-    getInitialCards() {
-      return fetch(`${this._baseUrl}/cards`, {
+    getMovies() {
+      return fetch(`${this._baseUrl}/movies`, {
         headers: {
           "Authorization": getToken(),
           'Content-Type': 'application/json'
@@ -46,37 +46,24 @@ class MainApi {
         .then(this._checkResponse)
     }
   
-    postCard({ name, link }) {
-      return fetch(`${this._baseUrl}/cards`, {
+    saveMovie(movie) {
+      return fetch(`${this._baseUrl}/movies`, {
         method: "POST",
         headers: {
           "Authorization": getToken(),
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name: name,
-          link: link,
-        }),
+        body: JSON.stringify(movie),
       }).then(this._checkResponse);
     }
     
-    deleteCard(cardId) {
-      return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    deleteMovie(movieId) {
+      return fetch(`${this._baseUrl}/movies/${movieId}`, {
         method: "DELETE",
         headers: {
           "Authorization": getToken(),
           'Content-Type': 'application/json'
         },
-      }).then(this._checkResponse);
-    }
-    
-    changeLikeCardStatus(cardId, needLike) {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        method: needLike ? "PUT" : "DELETE",
-        headers: {
-          "Authorization": getToken(),
-          'Content-Type': 'application/json'
-        }
       }).then(this._checkResponse);
     }
 }
@@ -86,7 +73,7 @@ const getToken = () => {
 }
     
 const mainApi = new MainApi({
-    baseUrl: "https://api.m.explorer.nomoredomains.sbs",
+    baseUrl: "http://localhost:3001",
 })
     
 export {mainApi};
