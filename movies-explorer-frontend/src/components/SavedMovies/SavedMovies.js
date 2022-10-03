@@ -6,6 +6,7 @@ import MoreSection from "../Movies/MoreSection/MoreSection";
 import { mainApi } from '../../utils/MainApi';
 import {searchFilter} from "../../utils/utils";
 import { NO_CONNECTION_MESSAGE, NOT_FOUND_MESSAGE } from '../../utils/constants';
+import { initialCardQuantity } from "../../utils/initialCardQuantity";
 
 function SavedMovies({
   renderCardsQuantity,
@@ -31,6 +32,7 @@ function SavedMovies({
 
     setMovies(filtered);
     setLoading(false);
+    setRenderCardsQuantity(initialCardQuantity);
   };
 
   useEffect(() => {

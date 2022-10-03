@@ -1,18 +1,23 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-function LoginRegForm({ title, formsName, buttonText, onSubmit, children }) {
+function LoginRegForm({ 
+  title,
+  formsName,
+  buttonText,
+  onSubmit,
+  disabled,
+  children,
+}) {
   return (
     <>
       <article className="loginregform">
         <NavLink className="header__logo header__logo_loginreg" to='/'></NavLink>
         <h2 className="loginregform__title">{title}</h2>
-        <form className="loginregform__form" name={formsName}>
          {children}
-        </form>
       </article>
       <article className="loginregform__wrapper">
-        <button className="loginregform__button" type="submit" onClick={onSubmit}>
+        <button className={`loginregform__button ${disabled && 'loginregform__button_disabled'}`} type="submit" onClick={onSubmit}>
           {buttonText}
         </button>
         {formsName === "register" ?          

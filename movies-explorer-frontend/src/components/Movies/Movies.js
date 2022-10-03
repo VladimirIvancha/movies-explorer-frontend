@@ -61,12 +61,13 @@ function Movies({
                 filter(query, shorts);
             })
             .catch(() => {
-                setErrorMessage(MOVVIES_MESSAGE);
+              setLoading(false);
+              setErrorMessage(MOVVIES_MESSAGE);
             });
     } else {
         filter(query, shorts);
     }
-    setRenderCardsQuantity(initialCardQuantity)
+    setRenderCardsQuantity(initialCardQuantity);
   };
 
   return (

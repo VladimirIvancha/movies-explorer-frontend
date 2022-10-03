@@ -22,17 +22,14 @@ class MainApi {
         .then(this._checkResponse)
     }
     
-    patchUserInfo({ name, about }) {
+    patchUserInfo(user) {
       return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
         headers: {
           "Authorization": getToken(),
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: name,
-          about: about,
-        }),
+        body: JSON.stringify(user),
       }).then(this._checkResponse);
     }
   

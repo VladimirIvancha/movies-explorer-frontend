@@ -18,11 +18,13 @@
 
 .movies-card-list__error-message {
     font-weight: 500;
-    font-size: 22px;
-    line-height: 30px;
+    font-size: 13px;
+    line-height: 18px;
     color: #ee3465;
     text-align: center;
     margin: 0;
+    max-width: calc(100% - 140px);
+    align-self: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -36,8 +38,7 @@
     }
 
     .movies-card-list__error-message {
-        font-size: 18px;
-        line-height: 28px;
+        max-width: calc(100% - 60px);
     }
 }
 
@@ -49,5 +50,10 @@
     .movies-card-list__movies-container {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 16px 24px;
+    }
+
+    .movies-card-list__error-message {
+        font-size: 11px;
+        max-width: calc(100% - 28px);
     }
 }

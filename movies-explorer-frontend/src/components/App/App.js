@@ -11,20 +11,19 @@ import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import * as auth from "../../utils/auth.js";
 import { mainApi } from "../../utils/MainApi";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { memo } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { initialCardQuantity } from "../../utils/initialCardQuantity";
 
 function App() {
+  const loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
+  const userContext = useMemo(() => ({currentUser, setCurrentUser}), [currentUser]);
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
-  const [loggedIn, setLoggedIn] = useState(false);
-  
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (loggedIn) {
@@ -40,14 +39,6 @@ function App() {
     }
   }, []);
 
-  function handleNavBtnClick() {
-    setisNavigationOpen(true);
-  }
-
-  function handleNavigationClose() {
-    setisNavigationOpen(false);
-  }
-
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -58,45 +49,28 @@ function App() {
       auth.getCheckToken(jwt)
         .then((res) => {
           if (res) {
-            setLoggedIn(true);
             history.push("/");
           }
         })
         .catch((err) => console.log(err));
     }
   }
-
-  function handleAuth(email, password) {
-    auth.authorize(email, password)
-    .then((token) => {
-      auth.getCheckToken(token)
-        .then((res) => {
-          setLoggedIn(true);
-          history.push("/");
-        })
-    })
-    .then(() => setMessage('Вы успешно вошли!'))
-    .catch(() => setMessage('Что-то пошло не так! Попробуйте ещё раз.'))
-  }
-
-  function handleRegistration(email, password, name) {
-    auth.register(email, password, name)
-      .then((res) => {
-        if (res.statusCode !== 201)
-          // setEmail(res.email)
-        history.push('/sign-in')
-      })
-      .then(() => setMessage('Вы успешно зарегистрировались!'))
-      .catch(() => setMessage('Что-то пошло не так! Попробуйте ещё раз.'))
-  }
-
+  
   function handleResetStates() {
     setisNavigationOpen(false);
     setRenderCardsQuantity(initialCardQuantity);
   }
+
+  function handleNavBtnClick() {
+    setisNavigationOpen(true);
+  }
+
+  function handleNavigationClose() {
+    setisNavigationOpen(false);
+  }
   
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={userContext}>
       <div className="page">
         <Switch>
           <Route exact path="/">
@@ -113,14 +87,10 @@ function App() {
             />
           </Route>
           <Route path="/sign-up">
-            <Register
-              onRegister={handleRegistration}
-            />
+            <Register />
           </Route>
           <Route path="/sign-in">
-            <Login
-              onAuth={handleAuth}
-            />
+            <Login />
           </Route>
           <ProtectedRoute
             loggedIn={loggedIn}
@@ -151,7 +121,6 @@ function App() {
             exact path="/profile"
             component={Profile}
             needFooter={false}
-            setLoggedIn={setLoggedIn}
             isNavigationOpen={isNavigationOpen}
             handleNavBtnClick={handleNavBtnClick}
             handleNavigationClose={handleNavigationClose}

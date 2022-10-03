@@ -7,7 +7,7 @@ export const register = (email, password, name) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password, name})
+    body: JSON.stringify(email, password, name)
   })
   .then(handleResponse)
 }
@@ -18,7 +18,7 @@ export const authorize = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify(email, password)
   })
   .then(handleResponse)
   .then((data) => {

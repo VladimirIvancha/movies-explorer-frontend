@@ -36,9 +36,15 @@ function SearchForm({
     }
 
     const handleCheckbox = () => {
-        setShorts(!shorts);
-        localStorage.setItem('shorts', !shorts);
-        handleSearch(inputValue, !shorts);
+        if (pathname === '/movies') {
+            setShorts(!shorts);
+            localStorage.setItem('shorts', !shorts);
+            handleSearch(inputValue, !shorts);
+        } else if (pathname === '/saved-movies') {
+            setShorts(!shorts);
+            localStorage.setItem('sm-shorts', !shorts);
+            handleSearch(inputValue, !shorts);
+        }
     };
 
     useEffect(() => {

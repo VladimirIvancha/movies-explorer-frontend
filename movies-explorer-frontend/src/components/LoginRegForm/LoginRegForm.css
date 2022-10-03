@@ -23,6 +23,13 @@
     width: 100%;
 }
 
+.loginregform__label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .loginregform__text {
     font-weight: 400;
     font-size: 10px;
@@ -56,12 +63,11 @@
     opacity: 0;
     margin: 0;
     margin-top: 10px;
-    align-self: flex-start;
+    align-self: center;
 }
 
 .form__input-error_active {
     opacity: 1;
-    margin: 0;
 }
 
 .loginregform__wrapper {
@@ -88,6 +94,11 @@
 .loginregform__button:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+.loginregform__button_disabled {
+    color: #C2C2C2;
+    background-color: #F8F8F8;
 }
 
 .loginregform__link {
