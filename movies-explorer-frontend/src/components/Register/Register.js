@@ -16,13 +16,17 @@ function Register() {
 
   const {setCurrentUser} = useContext(CurrentUserContext);
 
+  useEffect(() => {
+    setDisabled(!form.isValid);
+  }, [form.values]);
+
   function handleSubmit(e) {
     e.preventDefault();
     setDisabled(true);
 
     auth.register(form.values)
     .then((user) => auth.authorize({email: user.email, password: form.values.password}))
-    .then(() => mainApi.getUser())
+    .then(() => mainApi.getUserInfo())
     .then((user) => {
         if (user) {
             localStorage.setItem('loggedIn', true);
@@ -38,11 +42,7 @@ function Register() {
             setRegisterError('Нет соединения с сервером');
         }
     })
-  }
-
-  useEffect(() => {
-    setDisabled(!form.isValid);
-  }, [form.values]);
+  }  
 
   return (
     <section className="register">

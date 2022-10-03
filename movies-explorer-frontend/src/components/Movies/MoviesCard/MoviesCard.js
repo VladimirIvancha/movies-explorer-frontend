@@ -1,6 +1,7 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useContext, memo } from "react";
 import { useLocation } from 'react-router-dom';
 import { mainApi } from '../../../utils/MainApi';
+import { TooltipContext } from '../../../contexts/TooltipContext';
 import { getTimeFromMins } from "../../../utils/utils";
 import { 
   DEFAULT_MESSAGE,
@@ -15,6 +16,8 @@ function MoviesCard({
   const [savedId, setSavedId] = useState('');
   const [saved, setSaved] = useState(false);
   const location = useLocation();
+
+  const { setTooltipMessage } = useContext(TooltipContext);
 
   const handleSetSaved = (evt) => {
     if (!saved) {
@@ -55,9 +58,9 @@ function MoviesCard({
             })
             .catch((err) => {
                 if (err.status === 400) {
-                    console.log(DEFAULT_MESSAGE);
+                    setTooltipMessage(DEFAULT_MESSAGE);
                 } else {
-                    console.log(NO_CONNECTION_MESSAGE);
+                    setTooltipMessage(NO_CONNECTION_MESSAGE);
                 }
             });
     } else {
@@ -82,7 +85,7 @@ function MoviesCard({
                     evt.target.closest('.MoviesCard').remove();
                 }
             })
-            .catch(() => console.log(NO_CONNECTION_MESSAGE));
+            .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
     }
   };
 

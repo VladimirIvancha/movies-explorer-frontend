@@ -1,8 +1,9 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useContext, memo } from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import Preloader from "../Movies/Preloader/Preloader";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import MoreSection from "../Movies/MoreSection/MoreSection";
+import { TooltipContext } from '../../contexts/TooltipContext';
 import { mainApi } from '../../utils/MainApi';
 import {searchFilter} from "../../utils/utils";
 import { NO_CONNECTION_MESSAGE, NOT_FOUND_MESSAGE } from '../../utils/constants';
@@ -17,6 +18,8 @@ function SavedMovies({
   const [shorts, setShorts] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { setTooltipMessage } = useContext(TooltipContext);
 
   const handleSearch = (query, isShort) => {
         setLoading(true);
@@ -44,7 +47,7 @@ function SavedMovies({
                 localStorage.setItem('savedMovies', JSON.stringify(ownMovies));
                 setLoading(false);
             })
-            .catch(() => console.log(NO_CONNECTION_MESSAGE));
+            .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
   }, []);
 
   return (

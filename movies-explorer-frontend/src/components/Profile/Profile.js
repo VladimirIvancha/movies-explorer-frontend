@@ -8,7 +8,7 @@ import {
   CONFLICT_ERROR_CODE,
   EMAIL_EXIST_MESSAGE,
   NO_CONNECTION_MESSAGE,
-  SUCCESS__UPDATE_MESSAGE,
+  SUCCESS_UPDATE_MESSAGE,
 } from '../../utils/constants';
 
 function Profile() {
@@ -32,7 +32,7 @@ function Profile() {
     mainApi.patchUserInfo(form.values)
         .then((user) => {
           setCurrentUser(user);
-          setMessage(SUCCESS__UPDATE_MESSAGE);
+          setMessage(SUCCESS_UPDATE_MESSAGE);
           form.resetForm();
         })
         .catch((err) => {

@@ -6,7 +6,11 @@ import useFormValidation from "../../utils/useFormValidation"
 import TextInput from '../../utils/TextInput';
 import { mainApi } from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import {UNAUTH_ERROR_CODE} from '../../utils/constants';
+import { TooltipContext } from "../../contexts/TooltipContext";
+import { 
+  UNAUTH_ERROR_CODE,
+  SUCCESS_ENTER 
+} from '../../utils/constants';
 
 function Login({ onAuth }) {
   const form = useFormValidation();
@@ -15,6 +19,8 @@ function Login({ onAuth }) {
   const [disabled, setDisabled] = useState(true);
 
   const {setCurrentUser} = useContext(CurrentUserContext);
+
+  const { setTooltipMessage } = useContext(TooltipContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +38,7 @@ function Login({ onAuth }) {
               history.push('/movies');
           }
       })
+      .then(() => setTooltipMessage(SUCCESS_ENTER));
     })
     .catch((err) => {
       if (err.status === UNAUTH_ERROR_CODE) {
