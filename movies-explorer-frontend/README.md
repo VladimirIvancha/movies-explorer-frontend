@@ -14,6 +14,9 @@
 3. Запустить проект `npm start`
 4. Проект запускается на http://localhost:3000/
 
+## Ссылка на рабочий сайт:
+https://m.explorer.nomoredomains.sbs/
+
 ## Ссылка на макет для Figma:
 https://disk.yandex.ru/d/-_J3oDJCHHNUBA
 
