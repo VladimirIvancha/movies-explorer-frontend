@@ -33,6 +33,13 @@ class MainApi {
       }).then(this._checkResponse);
     }
   
+    signOut() {
+      return fetch(`${this._baseUrl}/signout`, {
+        credentials: 'include',
+        method: 'POST'
+      }).then(this._checkResponse);
+    };
+
     getMovies() {
       return fetch(`${this._baseUrl}/movies`, {
         headers: {

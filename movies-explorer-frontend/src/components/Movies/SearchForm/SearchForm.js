@@ -30,7 +30,7 @@ function SearchForm({
         setError(false);
         setPlaceholderContent('Фильм');
 
-        localStorage.setItem('query', inputValue);
+        localStorage.setItem((pathname === '/movies' ? 'query' : 'query-saved'), inputValue);
 
         handleSearch(inputValue, shorts);
     }

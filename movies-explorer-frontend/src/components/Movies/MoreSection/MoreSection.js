@@ -1,5 +1,11 @@
 import React, { useState, useEffect, memo } from "react";
 import { initialCardQuantity } from "../../../utils/initialCardQuantity";
+import {
+  MAX_MOVIES_STEP_1140,
+  MAX_MOVIES_STEP_DEFAULT,
+  BREAKPOINT_1140,
+  BREAKPOINT_1139,
+} from '../../../utils/constants';
 
 function MoreSection({
     movies,
@@ -19,28 +25,31 @@ function MoreSection({
 
     function showMoreCards() {
         let widthWind = document.querySelector('body').offsetWidth;
-        if (widthWind > 768) {
-          let n=3;
+        if (widthWind >= BREAKPOINT_1140) {
+          let n=MAX_MOVIES_STEP_1140;
           let newRenderCardsQuantity = renderCardsQuantity+n
           setRenderCardsQuantity(newRenderCardsQuantity);
-        } else if (widthWind <= 768) {
-          let n=2;
+        } else if (widthWind <= BREAKPOINT_1139) {
+          let n=MAX_MOVIES_STEP_DEFAULT;
           let newRenderCardsQuantity = renderCardsQuantity+n
           setRenderCardsQuantity(newRenderCardsQuantity);
         };
     }
 
     useEffect(() => {
-        window.addEventListener('resize', updateScreenWidth);
-      });
+      window.addEventListener('resize', updateScreenWidth);
+      return () => {
+        window.removeEventListener("resize", updateScreenWidth);
+      };
+    }, []);
     
-      function updateScreenWidth() {
-        setNoMoreCards(false);
-        function onResize() {
-          setRenderCardsQuantity(initialCardQuantity);
-        }
-        const resizeTimeout = setTimeout(() => {onResize()}, 500);
-        return () => clearTimeout(resizeTimeout);
+    function updateScreenWidth() {
+      setNoMoreCards(false);
+      function onResize() {
+        setRenderCardsQuantity(initialCardQuantity);
+      }
+      const resizeTimeout = setTimeout(() => {onResize()}, 500);
+      return () => clearTimeout(resizeTimeout);
     };
 
     return (

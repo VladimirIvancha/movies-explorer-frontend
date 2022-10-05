@@ -12,7 +12,7 @@ import {
   SUCCESS_ENTER 
 } from '../../utils/constants';
 
-function Login({ onAuth }) {
+function Login() {
   const form = useFormValidation();
   const history = useHistory();
   const [loginError, setLoginError] = useState('');
@@ -44,7 +44,7 @@ function Login({ onAuth }) {
       if (err.status === UNAUTH_ERROR_CODE) {
           setLoginError('Неправильные почта или пароль');
       } else {
-          setLoginError('Нет соединения с сервером');
+          setLoginError('Неправильные почта или пароль');
       }
     });
   }  

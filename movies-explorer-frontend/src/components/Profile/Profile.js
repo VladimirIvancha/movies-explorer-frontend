@@ -3,7 +3,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { NavLink } from 'react-router-dom';
 import { mainApi } from '../../utils/MainApi';
 import useFormValidation from '../../utils/useFormValidation';
-import { useHistory } from 'react-router-dom';
 import {
   CONFLICT_ERROR_CODE,
   EMAIL_EXIST_MESSAGE,
@@ -11,18 +10,11 @@ import {
   SUCCESS_UPDATE_MESSAGE,
 } from '../../utils/constants';
 
-function Profile() {
+function Profile({handleSignout}) {
   const form = useFormValidation();
-  const history = useHistory();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [disabled, setDisabled] = useState(true);
   const [message, setMessage] = useState('');
-
-  const handleSignout = () => {
-    setCurrentUser({});
-    localStorage.clear();
-    history.push("/");
-  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

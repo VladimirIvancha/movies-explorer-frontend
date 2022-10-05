@@ -1,6 +1,18 @@
 export const IMAGE_DOMAIN = 'https://api.nomoreparties.co/'
 export const SHORTMOVIES_DURATION = 40;
 
+export const MAX_MOVIES_1140 = 12;
+export const MAX_MOVIES_768 = 8;
+export const MAX_MOVIES_DEFAULT = 5;
+
+export const MAX_MOVIES_STEP_1140 = 3;
+export const MAX_MOVIES_STEP_DEFAULT = 2;
+
+export const BREAKPOINT_1140 = 1140;
+export const BREAKPOINT_1139 = 1139;
+export const BREAKPOINT_768 = 768;
+export const BREAKPOINT_320 = 320;
+
 export const TOOLTIP_SHOWN_DURATION_MS = 4000;
 
 export const SUCCESS_UPDATE_MESSAGE = 'Данные успешно обновлены';

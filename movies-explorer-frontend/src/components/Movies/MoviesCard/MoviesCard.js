@@ -33,7 +33,9 @@ function MoviesCard({
         //  Фильтр для заполнения отсутствующих значений в ответе от сервера фильмов
         Object.entries(newMovie).forEach((key) => {
             if (!key[1]) {
-                newMovie[key[0]] = '...';
+              newMovie[key[0]] = '...';
+            } else if (!/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/.test(newMovie.trailerLink)) {
+              newMovie.trailerLink = 'https://www.youtube.com';
             }
         });
 

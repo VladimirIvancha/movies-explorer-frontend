@@ -17,7 +17,12 @@ function LoginRegForm({
          {children}
       </article>
       <article className="loginregform__wrapper">
-        <button className={`loginregform__button ${disabled && 'loginregform__button_disabled'}`} type="submit" onClick={onSubmit}>
+        <button 
+          className={`loginregform__button ${disabled && 'loginregform__button_disabled'}`} 
+          type="submit" 
+          onClick={onSubmit}
+          disabled={disabled}
+        >
           {buttonText}
         </button>
         {formsName === "register" ?          

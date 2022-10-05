@@ -1,13 +1,26 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function NotFoundPage() {
-    return (
-      <section className="notfoundpage">
-        <p className="notfoundpage__title">404</p>
-        <p className="notfoundpage__text">Страница не найдена</p>
-        <NavLink className="notfoundpage__link" to='/'>Назад</NavLink>
-      </section>
-    );
-  }
+  const history = useHistory();
+
+  const handleGoBack = () => {
+    history.goBack();
+  };
+
+  return (
+    <section className="notfoundpage">
+      <p className="notfoundpage__title">404</p>
+      <p className="notfoundpage__text">Страница не найдена</p>
+      <button 
+        className="notfoundpage__link"
+        type="button"
+        onClick={handleGoBack}
+      >
+        Назад
+      </button>
+    </section>
+  );
+}
+
 export default NotFoundPage;

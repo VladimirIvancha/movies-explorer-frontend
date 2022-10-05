@@ -14,33 +14,35 @@ import * as auth from "../../utils/auth.js";
 import { mainApi } from "../../utils/MainApi";
 import React, { useState, useEffect, useMemo } from "react";
 import { memo } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { initialCardQuantity } from "../../utils/initialCardQuantity";
 import { TooltipContext } from "../../contexts/TooltipContext";
 import { NO_CONNECTION_MESSAGE } from '../../utils/constants';
 
-function App() {
+function App() {  
   const loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
+
   const history = useHistory();
+
   const [currentUser, setCurrentUser] = useState({});
   const userContext = useMemo(() => ({currentUser, setCurrentUser}), [currentUser]);
   const [tooltipMessage, setTooltipMessage] = useState('');
   const tooltipContext = useMemo(() => ({tooltipMessage, setTooltipMessage}), [tooltipMessage]);
+  
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
 
   useEffect(() => {
     if (loggedIn) {
-      mainApi.getUserInfo(loggedIn)
-        .then((user) => {
-          if (user) {
-            localStorage.setItem('userId', user._id);
-            setCurrentUser(user);
-          };
-        })
-        .catch(() => {setTooltipMessage(NO_CONNECTION_MESSAGE)});
-      tokenCheck();
+      mainApi.getUserInfo()
+      .then((user) => {
+        if (user) {
+          localStorage.setItem('userId', user._id);
+          setCurrentUser(user);
+        };
+      })
+      .catch(() => {setTooltipMessage(NO_CONNECTION_MESSAGE)});
     }
   }, []);
 
@@ -52,13 +54,14 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth.getCheckToken(jwt)
-        .then((res) => {
-          if (res) {
-            history.push("/");
-          }
+        .then((user) => {
+            setCurrentUser(user);
+            localStorage.setItem('loggedIn', true);
         })
-        .catch((err) => console.log(err));
-    }
+        .catch(() => {
+          localStorage.setItem('loggedIn', false);
+        })
+    } else localStorage.setItem('loggedIn', false);
   }
   
   function handleResetStates() {
@@ -73,6 +76,15 @@ function App() {
   function handleNavigationClose() {
     setisNavigationOpen(false);
   }
+
+  const handleSignout = (evt) => {
+    evt.preventDefault();
+    localStorage.clear();
+    setCurrentUser({});
+    mainApi.signOut()
+      .catch((err) => console.log(err));
+    history.push("/");
+  };
   
   return (
     <CurrentUserContext.Provider value={userContext}>
@@ -94,14 +106,22 @@ function App() {
               />
             </Route>
             <Route path="/sign-up">
-              <Register />
+              {
+                !loggedIn
+                ? <Register />
+                : <Redirect to='/movies' />
+              }
             </Route>
             <Route path="/sign-in">
-              <Login />
+              {
+                !loggedIn
+                ? <Login />
+                : <Redirect to='/movies' />
+              }
             </Route>
             <ProtectedRoute
               loggedIn={loggedIn}
-              exact path="/movies"
+              path="/movies"
               component={Movies}
               needFooter={true}
               isNavigationOpen={isNavigationOpen}
@@ -113,7 +133,7 @@ function App() {
             />
             <ProtectedRoute
               loggedIn={loggedIn}
-              exact path="/saved-movies"
+              path="/saved-movies"
               component={SavedMovies}
               needFooter={true}
               isNavigationOpen={isNavigationOpen}
@@ -125,10 +145,11 @@ function App() {
             />
             <ProtectedRoute
               loggedIn={loggedIn}
-              exact path="/profile"
+              path="/profile"
               component={Profile}
               needFooter={false}
               isNavigationOpen={isNavigationOpen}
+              handleSignout={handleSignout}
               handleNavBtnClick={handleNavBtnClick}
               handleNavigationClose={handleNavigationClose}
               resetStates={handleResetStates}

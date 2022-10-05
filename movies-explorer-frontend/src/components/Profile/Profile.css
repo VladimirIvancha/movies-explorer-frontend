@@ -66,6 +66,8 @@
     color: #000000;
     margin: 0;
     margin-top: 180px;
+    background-color: #FFFFFF;
+    border-style: none;
 }
 
 .profile__edit-link:hover {
