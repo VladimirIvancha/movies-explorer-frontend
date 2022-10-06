@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     max-width: 1280px;
-    margin-top: 32px;
+    margin-top: 19px;
     width: calc(100% - 140px);
     align-self: center;
 }
@@ -30,11 +30,15 @@
     background-position: center;
 }
 
-.custom-checkbox:checked+label::before {
+.custom-checkbox_active+label::before {
+    background-image: url(../../../images/smalltumb-checked.svg);
+}
+
+/* .custom-checkbox:checked+label::before {
     background-image: url(../../../images/smalltumb-checked.svg);
     background-repeat: no-repeat;
     background-position: center;
-}
+} */
 
 .custom-checkbox:disabled+label::before {
     background-image: url(../../../images/smalltumb-off.svg);
@@ -60,7 +64,7 @@
     .filtercheckbox {
         max-width: 768px;
         flex-direction: row-reverse;
-        margin-top: 29px;
+        margin-top: 16px;
         width: calc(100% - 60px);
     }
 
@@ -74,7 +78,7 @@
     .filtercheckbox {
         justify-content: center;
         max-width: 320px;
-        margin-top: 40px;
+        margin-top: 9px;
         width: calc(100% - 28px);
     }
     

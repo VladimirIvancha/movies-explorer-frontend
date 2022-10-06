@@ -9,149 +9,157 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { initialCards } from "../../utils/initialCards";
-import React, { useState } from "react";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import * as auth from "../../utils/auth.js";
+import { mainApi } from "../../utils/MainApi";
+import React, { useState, useEffect, useMemo } from "react";
 import { memo } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { initialCardQuantity } from "../../utils/initialCardQuantity";
+import { TooltipContext } from "../../contexts/TooltipContext";
+import { NO_CONNECTION_MESSAGE } from '../../utils/constants';
 
-function App() {
+function App() {  
+  const loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
 
-  const [currentUser, setCurrentUser] = useState({name: "Владимир"});
+  const history = useHistory();
 
-  const [IsShortMoviesCheckBoxOn, setIsShortMoviesCheckBoxOn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const userContext = useMemo(() => ({currentUser, setCurrentUser}), [currentUser]);
+  const [tooltipMessage, setTooltipMessage] = useState('');
+  const tooltipContext = useMemo(() => ({tooltipMessage, setTooltipMessage}), [tooltipMessage]);
+  
   const [isNavigationOpen, setisNavigationOpen] = useState(false);
-  const [needMoreCards, setNeedMoreCards] = useState(false);
-  const [cards, setCards] = useState(initialCards);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
 
-  function handleCardLike(card) {
-    setCards(
-        cards.map((item) =>
-        item.nameRU === card.nameRU ? { ...item, isLiked: !item.isLiked } : item
-        )
-    );
-  }
-
-  function handleShortMoviesFilter(card) {
-    if (IsShortMoviesCheckBoxOn === false) {
-    setCards(
-        cards.filter(function (item) {
-            if(item.duration <= 60) {
-                return true;
-            }
-        })
-    );
-    setIsShortMoviesCheckBoxOn(true);
-    } else {
-      setCards(initialCards);
-      setIsShortMoviesCheckBoxOn(false);
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi.getUserInfo()
+      .then((user) => {
+        if (user) {
+          localStorage.setItem('userId', user._id);
+          setCurrentUser(user);
+        };
+      })
+      .catch(() => {setTooltipMessage(NO_CONNECTION_MESSAGE)});
     }
-  };
+  }, []);
 
-  function resetFilterCheckBox() {
-    setCards(initialCards);
-    setIsShortMoviesCheckBoxOn(false);
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth.getCheckToken(jwt)
+        .then((user) => {
+            setCurrentUser(user);
+            localStorage.setItem('loggedIn', true);
+        })
+        .catch(() => {
+          localStorage.setItem('loggedIn', false);
+        })
+    } else localStorage.setItem('loggedIn', false);
+  }
+  
+  function handleResetStates() {
+    setisNavigationOpen(false);
+    setRenderCardsQuantity(initialCardQuantity);
   }
 
   function handleNavBtnClick() {
     setisNavigationOpen(true);
   }
 
-  function showMoreCards() {
-    if (needMoreCards === false) {
-      setNeedMoreCards(true);
-    } else {
-      setNeedMoreCards(false);
-    }
-  }
-
-  function closeAllPopups() {
+  function handleNavigationClose() {
     setisNavigationOpen(false);
-    setCards(initialCards);
-    setIsShortMoviesCheckBoxOn(false);
-    setNeedMoreCards(false);
   }
 
-  const likedCards = cards.filter(function (item) {
-    if(item.isLiked === true) {
-        return true;
-    }
-  });
-
-  function onSignOut() {
-    localStorage.removeItem("jwt");
-    setLoggedIn(false);
-  }
-
+  const handleSignout = (evt) => {
+    evt.preventDefault();
+    localStorage.clear();
+    setCurrentUser({});
+    mainApi.signOut()
+      .catch((err) => console.log(err));
+    history.push("/");
+  };
+  
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Switch>
-          <Route exact path="/">
-            <Header
+    <CurrentUserContext.Provider value={userContext}>
+      <TooltipContext.Provider value={tooltipContext}>
+        <div className="page">
+          <InfoTooltip message={tooltipMessage}/>
+          <Switch>
+            <Route exact path="/">
+              <Header
+                loggedIn={loggedIn}
+                isNavigationOpen={isNavigationOpen}
+                handleNavBtnClick={handleNavBtnClick}
+                handleNavigationClose={handleNavigationClose}
+                resetStates={handleResetStates}
+              />
+              <Main />
+              <Footer 
+                needFooter={true}
+              />
+            </Route>
+            <Route path="/sign-up">
+              {
+                !loggedIn
+                ? <Register />
+                : <Redirect to='/movies' />
+              }
+            </Route>
+            <Route path="/sign-in">
+              {
+                !loggedIn
+                ? <Login />
+                : <Redirect to='/movies' />
+              }
+            </Route>
+            <ProtectedRoute
               loggedIn={loggedIn}
+              path="/movies"
+              component={Movies}
+              needFooter={true}
               isNavigationOpen={isNavigationOpen}
               handleNavBtnClick={handleNavBtnClick}
-              closeAllPopups={closeAllPopups}
+              handleNavigationClose={handleNavigationClose}
+              resetStates={handleResetStates}
+              renderCardsQuantity={renderCardsQuantity}
+              setRenderCardsQuantity={setRenderCardsQuantity}
             />
-            <Main />
-            <Footer 
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              path="/saved-movies"
+              component={SavedMovies}
               needFooter={true}
+              isNavigationOpen={isNavigationOpen}
+              handleNavBtnClick={handleNavBtnClick}
+              handleNavigationClose={handleNavigationClose}
+              resetStates={handleResetStates}
+              renderCardsQuantity={renderCardsQuantity}
+              setRenderCardsQuantity={setRenderCardsQuantity}
             />
-          </Route>
-          <Route path="/sign-in">
-            <Register
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              path="/profile"
+              component={Profile}
+              needFooter={false}
+              isNavigationOpen={isNavigationOpen}
+              handleSignout={handleSignout}
+              handleNavBtnClick={handleNavBtnClick}
+              handleNavigationClose={handleNavigationClose}
+              resetStates={handleResetStates}
             />
-          </Route>
-          <Route path="/sign-up">
-            <Login
-            />
-          </Route>
-          <ProtectedRoute
-            loggedIn={loggedIn}
-            exact path="/movies"
-            component={Movies}
-            onCardLike={handleCardLike}
-            cards={cards}
-            onShortMoviesFilter={handleShortMoviesFilter}
-            needFooter={true}
-            resetFilterCheckBox={resetFilterCheckBox}
-            isNavigationOpen={isNavigationOpen}
-            handleNavBtnClick={handleNavBtnClick}
-            closeAllPopups={closeAllPopups}
-            showMoreCards={showMoreCards}
-            needMoreCards={needMoreCards}
-          />
-          <ProtectedRoute
-            loggedIn={loggedIn}
-            exact path="/saved-movies"
-            component={SavedMovies}
-            cards={likedCards}
-            onShortMoviesFilter={handleShortMoviesFilter}
-            needFooter={true}
-            resetFilterCheckBox={resetFilterCheckBox}
-            isNavigationOpen={isNavigationOpen}
-            handleNavBtnClick={handleNavBtnClick}
-            closeAllPopups={closeAllPopups}
-            showMoreCards={showMoreCards}
-            needMoreCards={needMoreCards}
-          />
-          <ProtectedRoute
-            loggedIn={loggedIn}
-            exact path="/profile"
-            component={Profile}
-            onSignOut={onSignOut}
-            needFooter={false}
-            isNavigationOpen={isNavigationOpen}
-            handleNavBtnClick={handleNavBtnClick}
-            closeAllPopups={closeAllPopups}
-          />
-          <Route path="*">
-            <NotFoundPage />
-          </Route>
-        </Switch>
-      </div>
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        </div>
+      </TooltipContext.Provider>
     </CurrentUserContext.Provider>
   );
 }

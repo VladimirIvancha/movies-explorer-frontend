@@ -11,12 +11,13 @@ const ProtectedRoute = ({component: Component, ...props}) => {
             path={props.path}
             isNavigationOpen={props.isNavigationOpen}
             handleNavBtnClick={props.handleNavBtnClick}
-            closeAllPopups={props.closeAllPopups}
+            handleNavigationClose={props.handleNavigationClose}
+            resetStates={props.resetStates}
         />
         <main className='main'>
             <Route path={props.path}>
             {
-                () => props.loggedIn ? <Component {...props} /> : <Redirect to="./sign-in"/>
+                () => props.loggedIn ? <Component {...props} /> : <Redirect to="/"/>
             }
             </Route>
         </main>

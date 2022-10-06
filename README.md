@@ -14,15 +14,14 @@
 3. Запустить проект `npm start`
 4. Проект запускается на http://localhost:3000/
 
+## Ссылка на рабочий сайт:
+https://m.explorer.nomoredomains.sbs/
+
 ## Ссылка на макет для Figma:
 https://disk.yandex.ru/d/-_J3oDJCHHNUBA
 
 ## Ссылка на пул реквест:
-https://github.com/VladimirIvancha/movies-explorer-frontend/pull/1#issue-1381496597
+https://github.com/VladimirIvancha/movies-explorer-frontend/pull/2#issue-1395895883
 
 ## Ссылка на репозиторий:
-https://github.com/VladimirIvancha/movies-explorer-frontend/tree/level-2
-
-# ВАЖНО!!! ДЛЯ КОРРЕКТНОЙ РАБОТЫ НЕОБХОДИМО УСТАНОВИТЬ ПАКЕТ react-scroll (npm i -S react-scroll)
-
-## ВАЖНО!!! На данном этапе дипломной работы для проверки верстки страниц логина и регистрации, а также хедера в состоянии "незалогинен" необходимо зайти в профиль и нажать "Выйти" 
+https://github.com/VladimirIvancha/movies-explorer-frontend/tree/level-3

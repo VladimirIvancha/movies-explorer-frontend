@@ -1,31 +1,94 @@
-import React, { useState, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
+import { useLocation } from "react-router-dom";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox"
 
 function SearchForm({
-    onShortMoviesFilter,
+    handleSearch,
+    setShorts,
+    shorts,
   }) 
   {
-    const [searchMovieKeyWords, setSearchMovieKeyWords] = useState("");
+    const [placeholderContent, setPlaceholderContent] = useState('Фильм');
+    const [error, setError] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+
+    const {pathname} = useLocation();
     
+    function handleInput(e) {
+        setInputValue(e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (!inputValue) {
+            setError(true);
+            setPlaceholderContent('Нужно ввести ключевое слово');
+            e.target.elements['searchmovie'].focus();
+            return;
+        }
+        setError(false);
+        setPlaceholderContent('Фильм');
+
+        localStorage.setItem((pathname === '/movies' ? 'query' : 'query-saved'), inputValue);
+
+        handleSearch(inputValue, shorts);
+    }
+
+    const handleCheckbox = () => {
+        if (pathname === '/movies') {
+            setShorts(!shorts);
+            localStorage.setItem('shorts', !shorts);
+            handleSearch(inputValue, !shorts);
+        } else if (pathname === '/saved-movies') {
+            setShorts(!shorts);
+            localStorage.setItem('sm-shorts', !shorts);
+            handleSearch(inputValue, !shorts);
+        }
+    };
+
+    useEffect(() => {
+        if (pathname === '/movies') {
+            const savedInputValue = localStorage.getItem('query');
+            const savedShorts = JSON.parse(localStorage.getItem('shorts'));
+    
+            if (savedInputValue) {
+                setInputValue(savedInputValue);
+            }
+    
+            if (savedShorts) {
+                setShorts(savedShorts);
+            }
+    
+            if (savedInputValue || (savedShorts === true)) {
+                handleSearch(savedInputValue, savedShorts);
+            }
+        }
+      }, []);
   
     return (
-        <form className="searchform">
-            <div className="searchform__wrapper">
+        <form className="searchform" name="searchform" onSubmit={handleSubmit} noValidate>
+            <div className="searchform__wrapper" htmlFor="searchmovie">
                 <input
-                    value={searchMovieKeyWords || ''}
+                    className={`searchform__item ${error && 'searchform__item_error'}`}
+                    id="searchmovie"
+                    name="searchmovie"
                     type="text"
-                    className="searchform__item"
-                    name="prophecy"
-                    placeholder="Фильм"
-                    minLength="2"
-                    maxLength="200"
+                    placeholder={placeholderContent}
+                    value={inputValue}
+                    onChange={handleInput}
                     required
                 />
-                <button className="searchform__find-icon"></button>
+                <button
+                    className="searchform__find-icon"
+                    type="submit"
+                    aria-label="Искать"
+                ></button>
             </div> 
             <div className="searchform__line"></div>
-            <FilterCheckbox 
-            onShortMoviesFilter={onShortMoviesFilter}
+            <FilterCheckbox
+                value={shorts}
+                onChange={handleCheckbox}
             />
         </form>
     );

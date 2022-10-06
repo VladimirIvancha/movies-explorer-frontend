@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 function Navigation({  
     path,
-    onClose,
+    resetStates,
+    handleNavigationClose,
     isOpen,
 }) 
 {
@@ -13,29 +14,29 @@ function Navigation({
     <div className={classNameNavigation}>
         <div className="navigation__container">
             <div className="navigation__wrapper">
-                <button className="navigation__close-btn" type="button" onClick={onClose}></button>
+                <button className="navigation__close-btn" type="button" onClick={handleNavigationClose}></button>
                 <NavLink to='/' 
                     className="navigation__main-link" 
-                    onClick={onClose}
+                    onClick={resetStates}
                 >
                     Главная
                 </NavLink>
                 <NavLink to="/movies"
                     className={`header__link header__link_black header__link_nav ${path === "/movies" && 'header__link_selected'}`}
-                    onClick={onClose}
+                    onClick={resetStates}
                 >
                     Фильмы
                 </NavLink>
                 <NavLink to="/saved-movies"
                     className={`header__link header__link_black header__link_nav ${path === "/saved-movies" && 'header__link_selected'}`}
-                    onClick={onClose}
+                    onClick={resetStates}
                 >
                     Сохраненные фильмы
                 </NavLink>
             </div>
             <NavLink to="/profile"
                 className='navigation__login-button'
-                onClick={onClose}
+                onClick={resetStates}
             >
                 <p className='navigation__text'>Аккаунт</p>
                 <div className='navigation__profile-wrapper'>

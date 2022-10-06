@@ -1,14 +1,57 @@
+import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
+import * as auth from "../../utils/auth";
 import LoginRegForm from "../LoginRegForm/LoginRegForm";
-import React, { useState } from "react";
+import useFormValidation from "../../utils/useFormValidation"
+import TextInput from '../../utils/TextInput';
+import { mainApi } from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { TooltipContext } from "../../contexts/TooltipContext";
+import { 
+  UNAUTH_ERROR_CODE,
+  SUCCESS_ENTER 
+} from '../../utils/constants';
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const form = useFormValidation();
+  const history = useHistory();
+  const [loginError, setLoginError] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
-  function handleChange(e) {
-    const { value } = e.target;
-    e.target.name === "email" ? setEmail(value) : setPassword(value);
-  }
+  const {setCurrentUser} = useContext(CurrentUserContext);
+
+  const { setTooltipMessage } = useContext(TooltipContext);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setDisabled(true);
+
+    auth.authorize(form.values)
+    .then((token) => {
+      auth.getCheckToken(token)
+      .then(() => mainApi.getUserInfo())
+      .then((user) => {
+          if (user) {
+              localStorage.setItem('loggedIn', true);
+              localStorage.setItem('userId', user._id);
+              setCurrentUser(user);
+              history.push('/movies');
+          }
+      })
+      .then(() => setTooltipMessage(SUCCESS_ENTER));
+    })
+    .catch((err) => {
+      if (err.status === UNAUTH_ERROR_CODE) {
+          setLoginError('Неправильные почта или пароль');
+      } else {
+          setLoginError('Неправильные почта или пароль');
+      }
+    });
+  }  
+
+  useEffect(() => {
+    setDisabled(!form.isValid);
+  }, [form.values]);
 
   return (
     <section className="logIn">
@@ -16,31 +59,37 @@ function Login() {
         title="Рады видеть!"
         formsName="logIn"
         buttonText="Войти"
+        onSubmit={handleSubmit}
+        disabled={disabled}
       >
-        <p className="loginregform__text">E-mail</p>
-        <input
-          className="loginregform__input"
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={email || ""}
-          minLength="6"
-          maxLength="40"
-          onChange={handleChange}
-          required
-        ></input>
-        <p className="loginregform__text">Пароль</p>
-        <input
-          className="loginregform__input"
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password || ""}
-          minLength="6"
-          maxLength="40"
-          onChange={handleChange}
-          required
-        ></input>
+        <form 
+          className="loginregform__form"
+          id="login"
+          name="login"
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <TextInput
+            name="email"
+            label="E-mail"
+            type="email"
+            pattern="^[\w]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$"
+            value={form.values.email || ''}
+            onChange={form.handleChange}
+            errorMessage={form.errors.email}
+          />
+          <TextInput
+            name="password"
+            label="Пароль"
+            type="password"
+            value={form.values.password || ''}
+            onChange={form.handleChange}
+            errorMessage={form.errors.password}
+          />
+          <p className="form__input-error form__input-error_active">
+            {loginError}
+          </p>
+        </form>
       </LoginRegForm>
     </section>
   );

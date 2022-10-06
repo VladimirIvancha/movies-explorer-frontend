@@ -29,6 +29,10 @@
     cursor: pointer;
 }
 
+.moreSection__button_hidden {
+    display: none;
+}
+
 @media (max-width: 320px) {
     .moreSection__button {
         width: 240px;

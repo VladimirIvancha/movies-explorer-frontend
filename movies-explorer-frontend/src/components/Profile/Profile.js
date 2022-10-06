@@ -1,95 +1,109 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { NavLink } from 'react-router-dom';
+import { mainApi } from '../../utils/MainApi';
+import useFormValidation from '../../utils/useFormValidation';
+import {
+  CONFLICT_ERROR_CODE,
+  EMAIL_EXIST_MESSAGE,
+  NO_CONNECTION_MESSAGE,
+  SUCCESS_UPDATE_MESSAGE,
+} from '../../utils/constants';
 
-function Profile({ onRegister, onSignOut }) {
-  const [name, setName] = useState("Владимир");
-  const [email, setEmail] = useState("Wil@mail.ru");
-  const [errorInputEmail, setErrorInputEmail] = useState({
-    isValid: true,
-    errorMessage: "",
-  });
-  const [isUserUseInputEmail, setIsUserUseInputEmail] = useState(false);
-  const [isEditProfileActive, setIsEditProfileActive] = useState(true);
-  const [isInputDisabled, setIsInputDisabled] = useState(true);
-  const [isInputRequired, setIsInputRequired] = useState(false);
+function Profile({handleSignout}) {
+  const form = useFormValidation();
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const [disabled, setDisabled] = useState(true);
+  const [message, setMessage] = useState('');
 
-  function handleChange(e) {
-    const { value } = e.target;
-    (e.target.name === "email") ? setEmail(value) : setName(value);
-  }
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
 
-  function handleEditProfileClick() {
-    setIsEditProfileActive(false);
-    setIsInputDisabled(false);
-    setIsInputRequired(true)
-  }
+    setDisabled(true);
 
-  {
-    const currentUser = useContext(CurrentUserContext);
+    mainApi.patchUserInfo(form.values)
+        .then((user) => {
+          setCurrentUser(user);
+          setMessage(SUCCESS_UPDATE_MESSAGE);
+          form.resetForm();
+        })
+        .catch((err) => {
+          if (err.status === CONFLICT_ERROR_CODE) {
+            setMessage(EMAIL_EXIST_MESSAGE);
+          } else {
+            setMessage(NO_CONNECTION_MESSAGE);
+          }
+        });
+  };
+
+  useEffect(() => {
+    form.setValues({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser]);
+
+  useEffect(() => {
+    const { name, email } = form.values;
+
+    if (form.isValid && (currentUser.name !== name || currentUser.email !== email)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [form.values, currentUser]);
 
   return (
     <div className="profile">
-        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
-        <form className="profile__form">
+        <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
+        <form 
+          className="profile__form"
+          id="profile"
+          name="profile"
+          onSubmit={handleSubmit}
+        >
+          <div className="profile__wrapper">
             <p className="profile__text">Имя</p>
             <input
                 className="profile__input"
+                type="text"
                 name="name"
-                type="name"
-                placeholder={currentUser.name}
-                value={name || ""}
-                minLength="6"
-                maxLength="40"
-                onChange={handleChange}
-                disabled={isInputDisabled}
-                required={isInputRequired}
+                value={form.values.name || ''}
+                onChange={form.handleChange}
+                pattern="^[a-zA-Zа-яА-Я\s-]+$"
+                required
             ></input>
+          </div>
+          <div className="profile__line"></div>
+          <div className="profile__wrapper">
+              <p className="profile__text">E-mail</p>
+              <input
+                  className="profile__input"
+                  type="email"
+                  name="email"
+                  value={form.values.email || ''}
+                  onChange={form.handleChange}
+                  pattern="^[\w]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$"
+                  required
+              ></input>
+          </div>
         </form>
-        <div className="profile__line"></div>
-        <form className="profile__form">
-            <p className="profile__text">E-mail</p>
-            <input
-                className="profile__input"
-                name="email"
-                type="email"
-                placeholder={currentUser.email}
-                value={email || ""}
-                minLength="6"
-                maxLength="40"
-                onChange={handleChange}
-                disabled={isInputDisabled}
-                required={isInputRequired}
-            ></input>
-        </form>
-        <span
-          className={`form__input-error${
-            !errorInputEmail.isValid ? " form__input-error_active" : ""
-          }`}
-          id="email-error"
+        <p className="form__input-error form__input-error_active">
+          {message}
+        </p>
+        <button 
+          className={`profile__edit-link ${disabled && 'profile__edit-link_disabled'}`}
+          type="submit"
+          form="profile"
+          disabled={disabled}
         >
-          {isUserUseInputEmail ? errorInputEmail.errorMessage : ""}
-        </span>
-        <>
-            {isEditProfileActive ?
-                <>
-                    <p className="profile__edit-link" onClick={handleEditProfileClick}>Редактировать</p>
-                    <NavLink to="/"
-                        className="profile__signout-link"
-                        onClick={onSignOut}
-                    >
-                    Выйти из аккаунта
-                    </NavLink>
-                </>
-            :
-            <button className="profile__save-button" type="submit">
-                Сохранить
-            </button>
-            }
-        </>
+          Редактировать
+        </button>
+        <NavLink to="/"
+          className="profile__signout-link"
+          onClick={handleSignout}
+        >
+          Выйти из аккаунта
+        </NavLink>
     </div>
   );
-  }
 }
 
 export default Profile;

@@ -1,21 +1,48 @@
+import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import * as auth from "../../utils/auth";
 import LoginRegForm from "../LoginRegForm/LoginRegForm";
-import React, { useState } from "react";
+import TextInput from '../../utils/TextInput';
+import { mainApi } from "../../utils/MainApi";
+import useFormValidation from "../../utils/useFormValidation"
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {CONFLICT_ERROR_CODE} from '../../utils/constants';
 
-function Register() 
-{
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorInputEmail, setErrorInputEmail] = useState({
-    isValid: true,
-    errorMessage: "",
-  });
-  const [isUserUseInputEmail, setIsUserUseInputEmail] = useState(false);
+function Register() {
+  const history = useHistory();
+  const form = useFormValidation();
+  const [registerError, setRegisterError] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
-  function handleChange(e) {
-    const { value } = e.target;
-    (e.target.name === "email") ? setEmail(value) : (e.target.name === "name") ? setName(value) : setPassword(value);
-  }
+  const {setCurrentUser} = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setDisabled(!form.isValid);
+  }, [form.values]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setDisabled(true);
+
+    auth.register(form.values)
+    .then((user) => auth.authorize({email: user.email, password: form.values.password}))
+    .then(() => mainApi.getUserInfo())
+    .then((user) => {
+        if (user) {
+            localStorage.setItem('loggedIn', true);
+            localStorage.setItem('userId', user._id);
+            setCurrentUser(user);
+            history.push('/movies');
+        }
+    })
+    .catch((err) => {
+        if (err.status === CONFLICT_ERROR_CODE) {
+            setRegisterError('Данный email уже зарегистрирован');
+        } else {
+            setRegisterError('Нет соединения с сервером');
+        }
+    })
+  }  
 
   return (
     <section className="register">
@@ -23,51 +50,45 @@ function Register()
         title="Добро пожаловать!"
         formsName="register"
         buttonText="Зарегистрироваться"
+        onSubmit={handleSubmit}
+        disabled={disabled}
       >
-        <p className="loginregform__text">Имя</p>
-        <input
-          className="loginregform__input"
-          name="name"
-          type="name"
-          placeholder="Имя"
-          value={name || ""}
-          minLength="6"
-          maxLength="40"
-          onChange={handleChange}
-          required
-        ></input>
-        <p className="loginregform__text">E-mail</p>
-        <input
-          className="loginregform__input"
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={email || ""}
-          minLength="6"
-          maxLength="40"
-          onChange={handleChange}
-          required
-        ></input>
-        <p className="loginregform__text">Пароль</p>
-        <input
-          className="loginregform__input"
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={[password] || ""}
-          minLength="6"
-          maxLength="40"
-          onChange={handleChange}
-          required
-        ></input>
-        <span
-          className={`form__input-error${
-            !errorInputEmail.isValid ? " form__input-error_active" : ""
-          }`}
-          id="email-error"
+        <form 
+          className="loginregform__form"
+          id="register"
+          name={"register"}
+          noValidate
         >
-          {isUserUseInputEmail ? errorInputEmail.errorMessage : ""}
-        </span>
+          <TextInput
+            name="name"
+            label="Имя"
+            type="text"
+            pattern="^[a-zA-Zа-яА-Я\s-]+$"
+            value={form.values.name || ''}
+            onChange={form.handleChange}
+            errorMessage={form.errors.name}
+          />
+          <TextInput
+            name="email"
+            label="E-mail"
+            type="email"
+            pattern="^[\w]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$"
+            value={form.values.email || ''}
+            onChange={form.handleChange}
+            errorMessage={form.errors.email}
+          />
+          <TextInput
+            name="password"
+            label="Пароль"
+            type="password"
+            value={form.values.password || ''}
+            onChange={form.handleChange}
+            errorMessage={form.errors.password}
+          />
+          <p className="form__input-error form__input-error_active">
+            {registerError}
+          </p>
+        </form>
       </LoginRegForm>
     </section>
   );

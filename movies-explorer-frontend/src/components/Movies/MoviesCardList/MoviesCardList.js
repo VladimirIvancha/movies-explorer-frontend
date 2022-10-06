@@ -2,31 +2,30 @@ import React, { memo } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({
-  onCardClick,
-  onTrashClick,
-  onCardLike,
-  cards,
-  cardLikeButtonViewClass,
-  needMoreCards,
+  movies,
+  errorMessage,
+  renderCardsQuantity,
 }) 
 
 {
   return (
-    <article className={`MoviesCardList ${needMoreCards && 'MoviesCardList_opened'}`}>
-      {cards.map((card) => 
-          (
-            <MoviesCard
-              key={card._id}
-              card={card}
-              onCardClick={onCardClick}
-              onCardLike={onCardLike}
-              onTrashClick={onTrashClick}
-              cardLikeButtonViewClass={cardLikeButtonViewClass}
-            />
-          )
+    <article className="MoviesCardList">
+      {errorMessage
+        ? <p className="movies-card-list__error-message">{errorMessage}</p>
+        : (
+          <div className="movies-card-list__movies-container">
+            {movies.slice(0, renderCardsQuantity).map((card) => 
+              (
+                <MoviesCard
+                  key={card.id || card.movieId}
+                  card={card}
+                />
+              )
+            )}
+          </div> 
         )}
     </article>
-  )
+  );
 }
 
 export default memo(MoviesCardList);
