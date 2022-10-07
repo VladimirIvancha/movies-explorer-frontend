@@ -1,7 +1,7 @@
 const BASE_URL = "https://api.m.explorer.nomoredomains.sbs"
 // const BASE_URL = "http://localhost:3001"
 
-const handleResponse = response => response.ok ? response.json() : Promise.reject('Ошибка на сервере: ' + response.status + ' - ' + response.statusText)
+const handleResponse = res => res.ok ? res.json() : Promise.reject(res)
 
 export const register = (email, password, name) => {
   return fetch(`${BASE_URL}/signup`, {

@@ -44,7 +44,7 @@ function Login() {
       if (err.status === UNAUTH_ERROR_CODE) {
           setLoginError('Неправильные почта или пароль');
       } else {
-          setLoginError('Неправильные почта или пароль');
+          setLoginError('Нет соединения с сервером');
       }
     });
   }  
