@@ -34,7 +34,6 @@ function App() {
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
 
   useEffect(() => {
-    tokenCheck();
     if (loggedIn) {
       mainApi.getUserInfo()
       .then((user) => {
@@ -53,9 +52,9 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   tokenCheck();
-  // }, []);
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   function tokenCheck() {
     const jwt = localStorage.getItem("jwt");
