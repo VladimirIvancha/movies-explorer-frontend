@@ -34,6 +34,7 @@ function App() {
   const [renderCardsQuantity, setRenderCardsQuantity] = useState(initialCardQuantity);
 
   useEffect(() => {
+    tokenCheck();
     if (loggedIn) {
       mainApi.getUserInfo()
       .then((user) => {
@@ -42,13 +43,19 @@ function App() {
           setCurrentUser(user);
         };
       })
-      .catch(() => {setTooltipMessage(NO_CONNECTION_MESSAGE)});
+      .catch(() => {
+        setTooltipMessage(NO_CONNECTION_MESSAGE);
+        localStorage.clear();
+        localStorage.setItem('loggedIn', false);
+        setCurrentUser({});
+        history.push("/");
+      });
     }
   }, []);
 
-  useEffect(() => {
-    tokenCheck();
-  }, []);
+  // useEffect(() => {
+  //   tokenCheck();
+  // }, []);
 
   function tokenCheck() {
     const jwt = localStorage.getItem("jwt");
