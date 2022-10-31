@@ -23,7 +23,7 @@ Frontend создан на React.js. Многостраничный сайт с 
 4. Проект запускается на http://localhost:3000/
 
 ### Ссылка на GitHub Pages:
-https://github.com/VladimirIvancha/react-mesto-auth
+https://github.com/VladimirIvancha/movies-explorer-frontend
 ____
 
 ### Планы по доработке:
