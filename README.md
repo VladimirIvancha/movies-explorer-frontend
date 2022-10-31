@@ -1,4 +1,4 @@
-# Проект: Movies Explorer (frontend)
+# Проект: Movies Explorer (frontend).
 ____
 
 ### Описание идеи:
