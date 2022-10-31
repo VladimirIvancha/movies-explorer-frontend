@@ -1,11 +1,19 @@
-# Проект movies-explorer-frontend
-Репозиторий для проекта Movie Explorer, включающий фронтенд часть со следующими возможностями: авторизации и регистрации пользователей, операции с фильмами и пользователями.
+# Проект: Movies Explorer (frontend)
+____
 
-## Проект подготовлен с помощью:
-* React.js
-* HTML5
-* CSS3
-* JS
+### Описание идеи:
+Многостраничный сайт с доступом к базе документальных фильмов с возможностью сохранения понравившихся роликов в своем профиле.
+### Функционал:
+Frontend создан на React.js. Многостраничный сайт с многопользовательским доступом. Позволяет регистрироваться новым пользователям (используя e-mail и пароль) и редактировать свой профиль. Позволяет проводить поиск в базе фильмов, фильтровать результаты поиска по короткометражкам и переходить на YouTube для просмотра роликов, а также сохранять в своем профиле понравившиеся видео, либо удалять их из сохраненных.
+
+### Стек:
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
+![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 
 ## Запуск проекта
 Для запуска проекта:
@@ -14,14 +22,9 @@
 3. Запустить проект `npm start`
 4. Проект запускается на http://localhost:3000/
 
-## Ссылка на рабочий сайт:
-https://m.explorer.nomoredomains.sbs/
+### Ссылка на GitHub Pages:
+https://github.com/VladimirIvancha/react-mesto-auth
+____
 
-## Ссылка на макет для Figma:
-https://disk.yandex.ru/d/-_J3oDJCHHNUBA
-
-## Ссылка на пул реквест:
-https://github.com/VladimirIvancha/movies-explorer-frontend/pull/2#issue-1395895883
-
-## Ссылка на репозиторий:
-https://github.com/VladimirIvancha/movies-explorer-frontend/tree/level-3
+### Планы по доработке:
+- [ ] реализовать возможность переключения на английский язык;
