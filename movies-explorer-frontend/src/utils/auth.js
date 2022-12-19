@@ -1,4 +1,5 @@
-const BASE_URL = "https://api.m.explorer.nomoredomains.sbs"
+const BASE_URL = "https://api.ivancha.ru"
+// const BASE_URL = "https://api.m.explorer.nomoredomains.sbs"
 // const BASE_URL = "http://localhost:3001"
 
 const handleResponse = response => response.ok ? response.json() : Promise.reject('Ошибка на сервере: ' + response.status + ' - ' + response.statusText)
