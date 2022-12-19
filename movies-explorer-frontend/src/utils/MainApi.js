@@ -77,7 +77,8 @@ const getToken = () => {
 }
     
 const mainApi = new MainApi({
-    baseUrl: "https://api.ivancha.ru",
+  baseUrl: "https://ivancha.ru",
+    // baseUrl: "https://api.ivancha.ru",
     // baseUrl: "https://api.m.explorer.nomoredomains.sbs",
     // baseUrl: "http://localhost:3001",
 })
