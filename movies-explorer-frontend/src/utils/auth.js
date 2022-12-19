@@ -1,4 +1,5 @@
-const BASE_URL = "https://ivancha.ru"
+const BASE_URL = "http://ivancha.ru/api"
+// const BASE_URL = "http://ivancha.ru"
 // const BASE_URL = "https://api.ivancha.ru"
 // const BASE_URL = "https://api.m.explorer.nomoredomains.sbs"
 // const BASE_URL = "http://localhost:3001"
