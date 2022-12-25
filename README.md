@@ -15,15 +15,19 @@ Frontend создан на React.js. Многостраничный сайт с 
 ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 
+### Ссылка на рабочий сайт:
+http://ivancha.ru/
+
+### Ссылка на GitHub Pages:
+https://github.com/VladimirIvancha/movies-explorer-frontend
+
 ## Запуск проекта
 Для запуска проекта:
 1. Клонировать репозиторий
 2. Перейти в основную папку
-3. Запустить проект `npm start`
-4. Проект запускается на http://localhost:3000/
-
-### Ссылка на GitHub Pages:
-https://github.com/VladimirIvancha/movies-explorer-frontend
+3. Установить зависимости `npm install`
+4. Запустить проект `npm start`
+5. Проект запускается на http://localhost:3000/
 ____
 
 ### Планы по доработке:
