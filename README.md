@@ -22,13 +22,13 @@ http://ivancha.ru/
 ### Ссылка на GitHub Pages:
 https://github.com/VladimirIvancha/movies-explorer-frontend
 
-## Запуск проекта
+<!-- ## Запуск проекта
 Для запуска проекта:
 1. Клонировать репозиторий
 2. Перейти в основную папку
 3. Установить зависимости `npm install`
 4. Запустить проект `npm start`
-5. Проект запускается на http://localhost:3000/
+5. Проект запускается на http://localhost:3000/ -->
 ____
 
 ### Планы по доработке:
