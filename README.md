@@ -15,7 +15,6 @@ Frontend создан на React.js. Многостраничный сайт с 
 ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 
-### Возможен запуск с рабочего сайта
 ### Ссылка на рабочий сайт:
 http://ivancha.ru/
 
