@@ -3,7 +3,7 @@ const initialPortfolioData = [
         name: "Хакатон. Лендинг для HR Яндекс.Практикума",
         link: "https://loner789.github.io/hackathon-design-web/",
         description: "Хакатон. Разработка и создание лендинга для HR Яндекс.Практикума в составе команды из 3-х дизайнеров и 3-х разработчиков.",
-        functional: "Сайт сверстан по технологиям HTML, CSS и JavaScript. Адаптивная верстка: от экрана Desctop (1440px) до Mobile (320px). Использованы flex и grid элементы, iframe для видео и сторонние библиотеки для эфектов (swiper). Сfqn cверстан по BEM и собран с помощью Webpack",
+        functional: "Сайт сверстан по технологиям HTML, CSS и JavaScript. Адаптивная верстка: от экрана Desctop (1440px) до Mobile (320px). Использованы flex и grid элементы, iframe для видео и сторонние библиотеки для эфектов (swiper). Сайт cверстан по BEM и собран с помощью Webpack",
     },
     {
         name: "Pet-проект Pomodoro timer",
